@@ -1,8 +1,9 @@
     <ul class="nav nav-pills nav-stacked">
 	<li role="presentation" class="truncate" style="width:125px;" *ngIf='auth.userProfile'><strong>{{auth.userProfile.name}}</strong></li>
-        <li role="presentation"><a href="#">Prints</a> </li>
-        <li role="presentation"><a href="#">Printers</a> </li>
+        <li role="presentation"><a routerLink="/prints" routerLinkActive="active">Prints</a> </li>
+        <li role="presentation"><a routerLink="/">Printers</a> </li>
         <li role="presentation"><a href="#">Filaments</a> </li>
         <li role="presentation"><a href="#">Stats</a> </li>
     </ul>
 
+    <div class="text-center" style="margin-top:600px">Hello </div>
