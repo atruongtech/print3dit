@@ -1,0 +1,38 @@
+import { Print } from './mockprints.service'
+
+export const PRINTS: Print[] = [
+    {PrintId: 1, 
+        Name: "3D Benchy", 
+        SourceUrl: "http://www.thingiverse.com/thing:763622", 
+        ModelPath: "", 
+        Success: true, 
+        PrintTimeMinutes: 125, 
+        MainPrintImageId: 1, 
+        FilamentId: 1, 
+        PrinterId:1, 
+        UserId:1,
+        PrintConfigId:1},
+    {PrintId: 2, 
+        Name: "Fidget spinner", 
+        SourceUrl: "http://www.thingiverse.com/thing:763622", 
+        ModelPath: "", 
+        Success: true, 
+        PrintTimeMinutes: 125, 
+        MainPrintImageId: 2, 
+        FilamentId: 1, 
+        PrinterId:1, 
+        UserId:1,
+        PrintConfigId:1},
+    {PrintId: 3, 
+        Name: "Baby groot", 
+        SourceUrl: "http://www.thingiverse.com/thing:763622", 
+        ModelPath: "", 
+        Success: true, 
+        PrintTimeMinutes: 125, 
+        MainPrintImageId: 3, 
+        FilamentId: 1, 
+        PrinterId:1, 
+        UserId:1,
+        PrintConfigId:1}
+    
+]
