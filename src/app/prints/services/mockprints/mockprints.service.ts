@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { PRINTS } from './mockprints'
 
 @Injectable()
-export class PrintService
+export class PrintsService
 {
-    getPrints(): Print[] {
+    public getPrints(): Print[] {
         return PRINTS;
     }
 }

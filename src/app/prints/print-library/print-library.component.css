@@ -4,4 +4,36 @@
 
 .form-group button {
     margin-top:20px;
-}	
+}
+
+// 10px gutter
+.gutter-10{
+  margin-right: -5px;
+  margin-left: -5px;
+}
+.gutter-10 > [class^="col-"], .gutter-10 > [class^=" col-"] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+
+.print-display-container{
+    background-color: lightgray;
+    border: 1px solid gray;
+    border-radius:3px;
+}
+
+.print-display-image{
+    margin:10px;
+}
+
+#print-library-display p {
+    margin-bottom:-3px
+}
+
+.single-print-display{
+    margin-bottom:20px;
+}
+
+
+	

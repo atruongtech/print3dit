@@ -2,8 +2,7 @@
     <app-side-nav></app-side-nav>
 </div> <!--col-md-2 -->
 <div class="col-md-10">
-  <div id="search">
-    <form class="form form-inline">
+    <form class="form form-inline" id="search-form">
       <div class="form-group col-md-6">
         <label class="control-label" for="printSearchTxt">Search</label>
         <div class="">
@@ -33,5 +32,19 @@
       </div> <!-- form-group col-md-4 col-md-offset-6 -->
 
     </form> <!-- form -->
-  </div> <!-- search -->
+  <div class="clearfix"></div>
+  <hr/>
+
+  <div id="print-library-display" class="gutter-10">
+    <div *ngFor="let print of allPrints" class="col-md-3 single-print-display">
+      <div class="print-display-container">
+        <img src="./assets/images/benchy.jpg" width="200" height="200" class="center-block print-display-image"/>
+        <p class="text-center">{{print.Name}}</p>
+        <p class="text-center">{{print.FilamentId}}</p>
+        <p class="text-center">{{print.PrinterId}}</p>
+        <p class="text-center">{{print.Success}}</p>
+      </div>
+    </div> <!-- let print of allPrints -->
+  <div>
+
 </div> <!-- col-md-10 -->
