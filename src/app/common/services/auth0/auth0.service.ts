@@ -49,6 +49,8 @@ export class Auth {
   public logout() {
     // Remove token from localStorage
     localStorage.removeItem('id_token');
+    // Remove stored user info from localStorage
+    localStorage.removeItem('profile');
     this.userProfile = undefined;
   }
 }
