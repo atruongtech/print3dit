@@ -7,17 +7,22 @@
 }
 
 // 10px gutter
-.gutter-10{
-  margin-right: -5px;
-  margin-left: -5px;
+.gutter-20{
+  margin-right: -10px;
+  margin-left: -10px;
 }
-.gutter-10 > [class^="col-"], .gutter-10 > [class^=" col-"] {
-  padding-right: 5px;
-  padding-left: 5px;
+.gutter-20 > [class^="col-"], .gutter-10 > [class^=" col-"] {
+  padding-right: 10px;
+  padding-left: 10px;
 }
-
 
 .print-display-container{
+
+    border: 1px solid rgba(0,0,0,0);
+    border-radius:3px;
+}
+
+.print-display-container:hover{
     background-color: lightgray;
     border: 1px solid gray;
     border-radius:3px;
@@ -25,6 +30,12 @@
 
 .print-display-image{
     margin:10px;
+    max-height:200px;
+    max-width:190px;
+}
+
+.print-display-info{
+    margin-bottom:5px;
 }
 
 #print-library-display p {
