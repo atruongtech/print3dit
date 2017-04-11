@@ -1,4 +1,4 @@
-import { Print } from './mockprints.service'
+import { Print, Filament, Printer } from './mockprints.service'
 
 export const PRINTS: Print[] = [
     {PrintId: 1, 
@@ -10,7 +10,7 @@ export const PRINTS: Print[] = [
         MainPrintImageUrl: "assets/images/benchy.JPG", 
         FilamentName: "Hatchbox PLA (Gray) - Spool 3", 
         PrinterName:"Maker Select - Printer 1", 
-        UserId:1},
+        UserId:2},
     {PrintId: 2, 
         Name: "Fidget spinner", 
         SourceUrl: "http://www.thingiverse.com/thing:763622", 
@@ -20,7 +20,7 @@ export const PRINTS: Print[] = [
         MainPrintImageUrl: "assets/images/benchy.JPG", 
         FilamentName: "Hatchbox PLA (Gray) - Spool 3", 
         PrinterName:"Maker Select - Printer 1", 
-        UserId:1},
+        UserId:2},
     {PrintId: 3, 
         Name: "Baby groot", 
         SourceUrl: "http://www.thingiverse.com/thing:763622", 
@@ -53,12 +53,12 @@ export const PRINTS: Print[] = [
         UserId:1}   
 ]
 
-export const FILAMENTS: string[] = [
-    "Monoprice PLA (White) - Spool 1",
-    "Hatchbox PLA (Gray) - Spool 3",
-    "Inland PETG (Black) - Spool 4",
+export const FILAMENTS: Filament[] = [
+    {Name: "Monoprice PLA (White) - Spool 1", UserId: 1},
+    {Name: "Hatchbox PLA (Gray) - Spool 3", UserId: 1},
+    {Name: "Inland PETG (Black) - Spool 4", UserId: 2}
 ]
 
-export const PRINTERS: string[] = [
-    "Maker Select - Printer 1"
+export const PRINTERS: Printer[] = [
+    {Name: "Maker Select - Printer 1", UserId: 1}
 ]

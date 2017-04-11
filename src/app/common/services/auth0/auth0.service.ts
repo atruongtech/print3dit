@@ -2,6 +2,7 @@
 
 import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
+import { Router } from '@angular/router';
 
 declare var require: any
 // Avoid name not found warnings
@@ -10,12 +11,18 @@ let Auth0Lock = require('auth0-lock').default;
 @Injectable()
 export class Auth {
   // Configure Auth0
-  lock = new Auth0Lock('sDfOrQe1VAPSBGViYgUGJUHXyzSgEgMC', 'print3dstats.auth0.com', {});
+  options: any = {
+    auth: {
+      redirectUrl: "http://ec2-34-209-3-213.us-west-2.compute.amazonaws.com:4200/",
+      responseType: "token"
+    }
+  }
+  lock = new Auth0Lock('sDfOrQe1VAPSBGViYgUGJUHXyzSgEgMC', 'print3dstats.auth0.com', this.options);
 
   //Store profile object in auth class
-  userProfile: Object;
+  userProfile: any;
 
-  constructor() {
+  constructor(private router: Router) {
     // Set userProfile attribute of already saved profile
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
@@ -24,16 +31,7 @@ export class Auth {
       localStorage.setItem('id_token', authResult.idToken);
 
       // Fetch profile information
-      this.lock.getProfile(authResult.idToken, (error, profile) => {
-        if (error) {
-          // Handle error
-          alert(error);
-          return;
-        }
-
-        localStorage.setItem('profile', JSON.stringify(profile));
-        this.userProfile = profile;
-      });
+      this.refreshProfile();
     });
   }
 
@@ -52,5 +50,23 @@ export class Auth {
     // Remove stored user info from localStorage
     localStorage.removeItem('profile');
     this.userProfile = undefined;
+    this.router.navigateByUrl("");
+  }
+
+  public refreshProfile() {
+    let token = localStorage.getItem("id_token");
+    this.lock.getProfile(token, (error, profile) => {
+        if (error) {
+          // Handle error
+          alert(error);
+          return;
+        }
+
+        // TODO check if there is an app_user_id set in app_metadata
+        // TODO if no app_user_id, call service to set it and get back updated profile info
+
+        localStorage.setItem('profile', JSON.stringify(profile));
+        this.userProfile = profile;
+      });
   }
 }

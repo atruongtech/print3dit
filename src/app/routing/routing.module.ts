@@ -6,7 +6,7 @@ import { PrintLibraryComponent } from '../prints/print-library/print-library.com
 
 const appRoutes : Routes = [
     {path: '', component: HomeComponent},
-    {path: 'prints', component: PrintLibraryComponent}
+    {path: 'prints', component: PrintLibraryComponent},
 ]
 
 @NgModule({

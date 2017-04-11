@@ -13,8 +13,8 @@
         <label class="control-label" for="filamentSelect">Filament</label>
         <div class="">
           <select class="form-control" name="filamentSelect" [(ngModel)]="selectedFilament">
-            <option value=null selected>Filter by filament</option>
-            <option *ngFor="let filament of filamentOptions">{{filament}}</option>
+            <option value="" selected>Filter by filament</option>
+            <option *ngFor="let filament of filamentOptions">{{filament.Name}}</option>
           </select>
         </div>
       </div> <!-- form-group col-md-4 -->
@@ -27,8 +27,8 @@
         <label class=" control-label" for="printerSelect">Printer</label>
         <div class="">
           <select class="form-control" name="printerSelect" [(ngModel)]="selectedPrinter">
-            <option value=null selected>Filter by printer</option>
-            <option *ngFor="let printer of printerOptions">{{printer}}</option>
+            <option value="" selected>Filter by printer</option>
+            <option *ngFor="let printer of printerOptions">{{printer.Name}}</option>
           </select>
         </div>
       </div> <!-- form-group col-md-4 col-md-offset-6 -->

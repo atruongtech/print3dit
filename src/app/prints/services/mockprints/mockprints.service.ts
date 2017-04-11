@@ -4,16 +4,16 @@ import { PRINTS, FILAMENTS, PRINTERS } from './mockprints'
 @Injectable()
 export class PrintsService
 {
-    public getPrints(): Print[] {
-        return PRINTS;
+    public getPrints(userId: number): Print[] {
+        return PRINTS.filter(print => print.UserId == userId);
     }
 
-    public getFilaments(): string[] {
-        return FILAMENTS;
+    public getFilaments(userId: number): Filament[] {
+        return FILAMENTS.filter(filament => filament.UserId == userId);
     }
 
-    public getPrinters(): string[] {
-        return PRINTERS;
+    public getPrinters(userId: number): Printer[] {
+        return PRINTERS.filter(printer => printer.UserId == userId);
     }
 }
 
@@ -28,4 +28,14 @@ export class Print {
     FilamentName: string;
     PrinterName: string;
     UserId: number;
+}
+
+export class Printer {
+    UserId: number;
+    Name: string;
+}
+
+export class Filament {
+    UserId: number;
+    Name: string;
 }
