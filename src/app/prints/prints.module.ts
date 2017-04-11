@@ -4,6 +4,7 @@ import { PrintLibraryComponent } from './print-library/print-library.component';
 import { SideNavComponent } from '../common/side-nav/side-nav.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PrintDetailsComponent } from './print-details/print-details.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { FormsModule } from '@angular/forms';
   ],
   declarations: [
     PrintLibraryComponent,
-    SideNavComponent
+    SideNavComponent,
+    PrintDetailsComponent,
     ]
 })
 export class PrintsModule { }

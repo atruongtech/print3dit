@@ -4,16 +4,16 @@ import { PRINTS, FILAMENTS, PRINTERS } from './mockprints'
 @Injectable()
 export class PrintsService
 {
-    public getPrints(userId: number): Print[] {
-        return PRINTS.filter(print => print.UserId == userId);
+    public getPrints(userId: number): Promise<Print[]> {
+        return Promise.resolve(PRINTS.filter(print => print.UserId == userId));
     }
 
-    public getFilaments(userId: number): Filament[] {
-        return FILAMENTS.filter(filament => filament.UserId == userId);
+    public getFilaments(userId: number): Promise<Filament[]> {
+        return Promise.resolve(FILAMENTS.filter(filament => filament.UserId == userId));
     }
 
-    public getPrinters(userId: number): Printer[] {
-        return PRINTERS.filter(printer => printer.UserId == userId);
+    public getPrinters(userId: number): Promise<Printer[]> {
+        return Promise.resolve(PRINTERS.filter(printer => printer.UserId == userId));
     }
 }
 

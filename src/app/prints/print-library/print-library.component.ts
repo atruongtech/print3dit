@@ -56,10 +56,13 @@ export class PrintLibraryComponent implements OnInit {
     }
     
 
-    this.filamentOptions = this.printsService.getFilaments(this.app_user_id);
-    this.allPrints = this.printsService.getPrints(this.app_user_id);
-    this.printerOptions = this.printsService.getPrinters(this.app_user_id);
-    this.displayPrints = this.allPrints;
+    this.printsService.getFilaments(this.app_user_id)
+      .then(filaments => this.filamentOptions = filaments);
+    this.printsService.getPrints(this.app_user_id)
+      .then(prints => this.allPrints = prints)
+      .then(prints => this.displayPrints = prints);
+    this.printsService.getPrinters(this.app_user_id)
+      .then(printers => this.printerOptions = printers);
 
     // initialize select boxes or else they are empty
     this.selectedFilament = "";
