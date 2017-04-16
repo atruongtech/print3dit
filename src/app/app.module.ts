@@ -11,12 +11,14 @@ import { AppComponent } from './app.component';
 import { RoutingModule} from './routing/routing.module';
 import { HomeComponent } from './home/home.component';
 import { BrandBarComponent } from './core/brand-bar/brand-bar.component';
+import { LoginComponent } from './common/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    BrandBarComponent
+    BrandBarComponent,
+    LoginComponent,
   ],
   imports: [
     PrintsModule,

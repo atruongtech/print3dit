@@ -11,8 +11,8 @@
       <a class="navbar-brand" href="#">Print3dStats</a>
     </div>
     <div class="nav navbar-form navbar-right">
-        <button type="button" class="btn btn-success" *ngIf="!auth.authenticated()" (click)="auth.login()">Sign In</button>
-        <button type="button" class="btn btn-default" *ngIf="auth.authenticated()" (click)="auth.logout()">Sign Out</button>
+        <button type="button" class="btn btn-success" *ngIf="!auth.authenticated()" (click)="login()">Sign In</button>
+        <button type="button" class="btn btn-default" *ngIf="auth.authenticated()" (click)="logout()">Sign Out</button>
     </div>
   </div><!-- /.container-->
   

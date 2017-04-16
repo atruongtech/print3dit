@@ -13,7 +13,7 @@ export class Auth {
   // Configure Auth0
   options: any = {
     auth: {
-      redirectUrl: "http://ec2-34-209-3-213.us-west-2.compute.amazonaws.com:4200/",
+      redirectUrl: "http://ec2-34-209-3-213.us-west-2.compute.amazonaws.com:4200/login",
       responseType: "token"
     }
   }
@@ -50,7 +50,6 @@ export class Auth {
     // Remove stored user info from localStorage
     localStorage.removeItem('profile');
     this.userProfile = undefined;
-    this.router.navigateByUrl("");
   }
 
   public refreshProfile() {
