@@ -1,3 +1,50 @@
-<p>
-  print-details works!
-</p>
+<div class="col-md-2">
+    <app-side-nav></app-side-nav>
+</div> <!--col-md-2 -->
+<div class="col-md-10" *ngIf="print">
+  <img class="center-block" id="main-image" [src]=print.MainPrintImageUrl/>
+  <h1 class="h2 text-center center-block"><strong>{{print.Name}}</strong></h1>
+  <hr/>
+  <div class="clearfix"></div>
+  <div class="row">
+    <h2 class="h3">Print Information</h2>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <dl>
+        <dt>Date Printed</dt>
+        <dd>{{print.Date.toLocaleDateString()}}</dd>
+        <dt>Source URL</dt>
+        <dd>{{print.SourceUrl}}</dd>
+        <dt>Model</dt>
+        <dd><a *ngIf="print.ModelPath" [href]=print.ModelPath>Click here to download</a></dd> 
+      </dl>
+    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <dl>
+        <dt>Successful</dt>
+        <dd *ngIf="print.Success == true">Yes</dd>
+        <dd *ngIf="print.Success == false">No</dd>
+        <dt>Print Time</dt>
+        <dd *ngIf="print.PrintTimeMinutes || print.PrintTimeHours">{{print.PrintTimeHours}} hours {{print.PrintTimeMinutes}} minutes</dd>
+      </dl>
+    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+    <div class="clearfix"></div>
+    <h2 class="h3">Filament Usage</h2>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <dl>
+        <dt>Filament Name</dt>
+        <dd>{{print.FilamentName}}</dd>
+      </dl>
+    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <dl>
+        <dt>Length Used</dt>
+        <dd>{{print.LengthUsed}} meters</dd>
+      </dl>
+    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+
+        
+  </div> <!-- row -->
+
+
+</div> <!-- col-md-10 -->
+

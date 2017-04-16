@@ -6,7 +6,7 @@
     margin-top:20px;
 }
 
-// 10px gutter
+// 20px gutter
 .gutter-20{
   margin-right: -10px;
   margin-left: -10px;
@@ -28,15 +28,30 @@
     border-radius:3px;
 }
 
+.print-display-image-container{
+    display:flex;
+    align-items:center;
+    height:160px;
+    width:190px;
+}
+
 .print-display-image{
-    margin:10px;
-    max-height:200px;
+    padding:5px;
+    max-height:160px;
     max-width:190px;
+    border:1px solid lightgrey;
+    border-radius:5px;
 }
 
 .print-display-info{
     margin-bottom:5px;
+    margin-top:3px;
 }
+
+.print-display-info p{
+    color:black;
+}
+
 
 #print-library-display p {
     margin-bottom:-3px
@@ -46,5 +61,8 @@
     margin-bottom:20px;
 }
 
+.single-print-display a:hover{
+    text-decoration:none;
+}
 
 	

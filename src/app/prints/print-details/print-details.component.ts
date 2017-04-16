@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+
+import { PrintsService, PrintDetailView } from '../services/mockprints/mockprints.service';
 
 @Component({
-  selector: 'app-print-details',
   templateUrl: './print-details.component.html',
   styleUrls: ['./print-details.component.css']
 })
 export class PrintDetailsComponent implements OnInit {
 
-  constructor() { }
+  print: PrintDetailView;
+
+  constructor(private route: ActivatedRoute
+              ,private router: Router
+              ,private printsService: PrintsService) { }
 
   ngOnInit() {
+    this.route.params
+    // (+) converts string 'id' to a number
+    .switchMap((params: Params) => this.printsService.getPrintById(+params['id']))
+    .subscribe((print: PrintDetailView) => this.print = print);
+
+    
   }
 
 }

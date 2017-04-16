@@ -1,0 +1,12 @@
+#main-image{
+    height:200px;
+    width:auto;
+    border: 1px solid lightgrey;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top:20px;
+}
+
+dd {
+    margin-bottom:10px;
+}
