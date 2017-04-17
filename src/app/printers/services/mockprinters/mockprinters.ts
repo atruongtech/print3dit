@@ -1,0 +1,77 @@
+import { PrinterDetailView, PrinterLibraryView } from './mockprinters.service';
+
+export const PRINTERDETAILS: PrinterDetailView[] = [
+    {PrinterId: 1,
+        UserId: 1,
+        Name: "Monoprice Maker Select",
+        NumberOfPrints: 10,
+        DateAcquired: new Date("4/12/2016"),
+        Source: "Newegg",
+        BeltMaintInt: 100,
+        BeltMaintLast: 325,
+        LubeMaintInt: 100,
+        LubeMaintLast: 325,
+        WireMaintInt: 100,
+        WireMaintLast: 325,
+        PrintTimeHours: 400,
+        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+    },
+    {PrinterId: 2,
+        UserId: 1,
+        Name: "Lulzbot TAZ6",
+        NumberOfPrints: 10,
+        DateAcquired: new Date("4/12/2016"),
+        Source: "Newegg",
+        BeltMaintInt: 100,
+        BeltMaintLast: 325,
+        LubeMaintInt: 100,
+        LubeMaintLast: 325,
+        WireMaintInt: 100,
+        WireMaintLast: 325,
+        PrintTimeHours: 400,
+        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+    },
+    {PrinterId: 3,
+        UserId: 1,
+        Name: "Wanhao Duplicator",
+        NumberOfPrints: 10,
+        DateAcquired: new Date("4/12/2016"),
+        Source: "Newegg",
+        BeltMaintInt: 100,
+        BeltMaintLast: 325,
+        LubeMaintInt: 100,
+        LubeMaintLast: 325,
+        WireMaintInt: 100,
+        WireMaintLast: 325,
+        PrintTimeHours: 400,
+        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+    },
+]
+
+export const PRINTERLIBRARY: PrinterLibraryView[] = [
+    {PrinterId: 1,
+        UserId: 1,
+        Name: "Monoprice Maker Select",
+        NumberOfPrints: 10,
+        DateAcquired: new Date("4/12/2016"),
+        PrintTimeHours: 400,
+        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+    },
+    {PrinterId: 2,
+        UserId: 1,
+        Name: "Lulzbot TAZ6",
+        NumberOfPrints: 10,
+        DateAcquired: new Date("4/12/2016"),
+        PrintTimeHours: 400,
+        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+    },
+    {PrinterId: 3,
+        UserId: 1,
+        Name: "Wanhao Duplicator",
+        NumberOfPrints: 10,
+        DateAcquired: new Date("4/12/2016"),
+        PrintTimeHours: 400,
+        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+    },
+
+]

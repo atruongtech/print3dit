@@ -38,14 +38,14 @@
   <div class="clearfix"></div>
   <hr/>
 
-  <div id="print-library-display" class="gutter-20">
-    <div *ngFor="let print of displayPrints" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 single-print-display">
+  <div id="library-display" class="gutter-20">
+    <div *ngFor="let print of displayPrints" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 single-display">
       <a [routerLink]="['printdetails',print.PrintId]">
-        <div class="print-display-container">
-          <div class="print-display-image-container center-block">
-            <img [src]=print.MainPrintImageUrl class="center-block print-display-image"/>
+        <div class="display-container">
+          <div class="display-image-container center-block">
+            <img [src]=print.MainPrintImageUrl class="center-block display-image"/>
           </div>
-          <div class="print-display-info">
+          <div class="display-info">
             <p class="text-center"><strong>{{print.Name}}</strong></p>
             <p class="text-center">{{print.FilamentName}}</p>
             <p class="text-center">{{print.PrinterName}}</p>

@@ -1,10 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
+import { PrinterLibraryComponent } from './printer-library/printer-library.component';
+
+const printerRoutes: Routes = [
+  { path:"printers", component: PrinterLibraryComponent }
+]
 
 @NgModule({
   imports: [
-    CommonModule
+    RouterModule.forChild(printerRoutes)
   ],
-  declarations: []
+  exports: [
+    RouterModule
+  ]
 })
 export class PrintersRoutingModule { }

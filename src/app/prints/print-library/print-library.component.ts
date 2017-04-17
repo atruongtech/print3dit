@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { PrintsService, PrintDetailView, FilamentForPrintsView, PrinterForPrintsView } from '../services/mockprints/mockprints.service';
+import { PrintsService, PrintDetailView, FilamentPrintsView, PrinterPrintsView } from '../services/mockprints/mockprints.service';
 import { Auth } from '../../common/services/auth0/auth0.service';
 
 
 @Component({
   selector: 'app-print-library',
   templateUrl: './print-library.component.html',
-  styleUrls: ['./print-library.component.css']
+  styleUrls: ['../../common/libraries/libraries.css'],
 })
 export class PrintLibraryComponent implements OnInit {
   app_user_id: number;
@@ -16,8 +16,8 @@ export class PrintLibraryComponent implements OnInit {
   allPrints: PrintDetailView[];
   displayPrints: PrintDetailView[];
 
-  filamentOptions: FilamentForPrintsView[];
-  printerOptions: PrinterForPrintsView[];
+  filamentOptions: FilamentPrintsView[];
+  printerOptions: PrinterPrintsView[];
 
   printSearchTxt: string;
   selectedFilament: string;

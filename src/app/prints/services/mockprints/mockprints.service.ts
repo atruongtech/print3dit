@@ -12,11 +12,11 @@ export class PrintsService
         return Promise.resolve(PRINTS.find(print => print.PrintId == printId));
     }
 
-    public getFilaments(userId: number): Promise<FilamentForPrintsView[]> {
+    public getFilaments(userId: number): Promise<FilamentPrintsView[]> {
         return Promise.resolve(FILAMENTSPRINTSLIBRARYVIEW.filter(filament => filament.UserId == userId));
     }
 
-    public getPrinters(userId: number): Promise<PrinterForPrintsView[]> {
+    public getPrinters(userId: number): Promise<PrinterPrintsView[]> {
         return Promise.resolve(PRINTERSPRINTSLIBRARYVIEW.filter(printer => printer.UserId == userId));
     }
 }
@@ -39,13 +39,13 @@ export class PrintDetailView {
     PrintConfigId: number;
 }
 
-export class PrinterForPrintsView {
+export class PrinterPrintsView {
     UserId: number;
     Name: string;
     PrinterId: number;
 }
 
-export class FilamentForPrintsView {
+export class FilamentPrintsView {
     UserId: number;
     Name: string;
     FilamentId: number;

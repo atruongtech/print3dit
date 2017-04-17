@@ -1,4 +1,4 @@
-import { PrintDetailView, FilamentForPrintsView, PrinterForPrintsView } from './mockprints.service'
+import { PrintDetailView, FilamentPrintsView, PrinterPrintsView } from './mockprints.service'
 
 export const PRINTS: PrintDetailView[] = [
     // represents a returned VIEW. Not necessarily the entity
@@ -79,12 +79,12 @@ export const PRINTS: PrintDetailView[] = [
         PrintConfigId: undefined}   
 ]
 
-export const FILAMENTSPRINTSLIBRARYVIEW: FilamentForPrintsView[] = [
+export const FILAMENTSPRINTSLIBRARYVIEW: FilamentPrintsView[] = [
     {Name: "Monoprice PLA (White) - Spool 1", UserId: 1, FilamentId: 1},
     {Name: "Hatchbox PLA (Gray) - Spool 3", UserId: 1, FilamentId: 2},
     {Name: "Inland PETG (Black) - Spool 4", UserId: 2, FilamentId: 3}
 ]
 
-export const PRINTERSPRINTSLIBRARYVIEW: PrinterForPrintsView[] = [
+export const PRINTERSPRINTSLIBRARYVIEW: PrinterPrintsView[] = [
     {Name: "Maker Select - Printer 1", UserId: 1, PrinterId: 1}
 ]
