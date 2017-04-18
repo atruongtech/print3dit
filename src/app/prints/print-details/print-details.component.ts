@@ -7,7 +7,7 @@ import { PrintsService, PrintDetailView } from '../services/mockprints/mockprint
 
 @Component({
   templateUrl: './print-details.component.html',
-  styleUrls: ['./print-details.component.css']
+  styleUrls: ['../../common/css/details/details.css']
 })
 export class PrintDetailsComponent implements OnInit {
 

@@ -7,7 +7,7 @@ import { Auth } from '../../common/services/auth0/auth0.service';
 @Component({
   selector: 'app-printer-library',
   templateUrl: './printer-library.component.html',
-  styleUrls: ['../../common/libraries/libraries.css']
+  styleUrls: ['../../common/css/libraries/libraries.css']
 })
 export class PrinterLibraryComponent implements OnInit {
 

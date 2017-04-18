@@ -1,4 +1,4 @@
-import { PrinterDetailView, PrinterLibraryView } from './mockprinters.service';
+import { PrinterDetailView, PrinterLibraryView, PrintsPrinterView } from './mockprinters.service';
 
 export const PRINTERDETAILS: PrinterDetailView[] = [
     {PrinterId: 1,
@@ -14,7 +14,12 @@ export const PRINTERDETAILS: PrinterDetailView[] = [
         WireMaintInt: 100,
         WireMaintLast: 325,
         PrintTimeHours: 400,
-        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+        MainPrinterImageUrl: "assets/images/makerselect.jpg",
+        UserPrinterId: 1,
+        Prints: [ 
+            { PrintId: 1, Name: "3D Benchy", MainPrintImageUrl: "assets/images/benchy.JPG"}, 
+            { PrintId: 2, Name: "Fidget Spinner", MainPrintImageUrl: "assets/images/benchy.JPG"}
+        ]
     },
     {PrinterId: 2,
         UserId: 1,
@@ -29,9 +34,11 @@ export const PRINTERDETAILS: PrinterDetailView[] = [
         WireMaintInt: 100,
         WireMaintLast: 325,
         PrintTimeHours: 400,
-        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+        MainPrinterImageUrl: "assets/images/makerselect.jpg",
+        UserPrinterId: 2,
+        Prints: undefined
     },
-    {PrinterId: 3,
+    {PrinterId: 6,
         UserId: 1,
         Name: "Wanhao Duplicator",
         NumberOfPrints: 10,
@@ -44,7 +51,9 @@ export const PRINTERDETAILS: PrinterDetailView[] = [
         WireMaintInt: 100,
         WireMaintLast: 325,
         PrintTimeHours: 400,
-        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+        MainPrinterImageUrl: "assets/images/makerselect.jpg",
+        UserPrinterId: 3,
+        Prints: undefined
     },
 ]
 
@@ -55,7 +64,8 @@ export const PRINTERLIBRARY: PrinterLibraryView[] = [
         NumberOfPrints: 10,
         DateAcquired: new Date("4/12/2016"),
         PrintTimeHours: 400,
-        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+        MainPrinterImageUrl: "assets/images/makerselect.jpg",
+        UserPrinterId: 1
     },
     {PrinterId: 2,
         UserId: 1,
@@ -63,15 +73,17 @@ export const PRINTERLIBRARY: PrinterLibraryView[] = [
         NumberOfPrints: 10,
         DateAcquired: new Date("4/12/2016"),
         PrintTimeHours: 400,
-        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+        MainPrinterImageUrl: "assets/images/makerselect.jpg",
+        UserPrinterId: 2
     },
-    {PrinterId: 3,
+    {PrinterId: 6,
         UserId: 1,
         Name: "Wanhao Duplicator",
         NumberOfPrints: 10,
         DateAcquired: new Date("4/12/2016"),
         PrintTimeHours: 400,
-        MainPrinterImageUrl: "assets/images/makerselect.jpg"
+        MainPrinterImageUrl: "assets/images/makerselect.jpg",
+        UserPrinterId: 3
     },
 
 ]

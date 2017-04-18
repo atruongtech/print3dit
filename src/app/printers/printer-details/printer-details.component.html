@@ -1,0 +1,84 @@
+<div class="col-md-2">
+    <app-side-nav></app-side-nav>
+</div> <!--col-md-2 -->
+<div class="col-md-10" *ngIf="printer">
+  <img class="center-block" id="main-image" [src]=printer.MainPrinterImageUrl/>
+  <h1 class="h2 text-center center-block"><strong>{{printer.Name}} - Printer {{printer.UserPrinterId}}</strong></h1>
+  <hr/>
+  <div class="clearfix"></div>
+  <div class="row">
+    <h2 class="h3">Printer Information</h2>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <dl>
+        <dt>Name</dt>
+        <dd>{{printer.Name}}</dd>
+        <dt>Total Print Time</dt>
+        <dd>{{printer.PrintTimeHours}} hrs</dd>
+        <dt>Number of Prints</dt>
+        <dd>{{printer.NumberOfPrints}}</dd>       
+        
+      </dl>
+    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <dl>
+        <dt>Date Acquired</dt>
+        <dd>{{printer.DateAcquired.toLocaleDateString()}}</dd>
+        <dt>Source</dt>
+        <dd>{{printer.Source}}</dd>
+        <dt>Printer Id</dt>
+        <dd>{{printer.UserPrinterId}}</dd>
+      </dl>
+    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+    <div class="clearfix"></div>
+    <h2 class="h3">Maintenance Information</h2>
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <dl>
+        <dt>Belts Maint. Interval</dt>
+        <dd>{{printer.BeltMaintInt}} hrs</dd>
+        <dt>Belts Last Service (Total Print Time)</dt>
+        <dd>{{printer.BeltMaintInt}} hrs</dd>
+      </dl>
+      <form class="form">
+        <button type="button" class="btn btn-default maint-btn">Belt Maintenance Performed</button>
+      </form>
+
+      <dl>
+        <dt>Wiring Maint. Interval</dt>
+        <dd>{{printer.WireMaintInt}} hrs</dd>
+        <dt>Wiring Last Service (Total Print Time)</dt>
+        <dd>{{printer.WireMaintInt}} hrs</dd>
+      </dl>
+      <form class="form">
+        <button type="button" class="btn btn-default maint-btn">Wire Maintenance Performed</button>
+      </form>
+    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <dl>
+        <dt>Lubr. Maint. Interval</dt>
+        <dd>{{printer.LubeMaintInt}} hrs</dd>
+        <dt>Lubr. Last Service (Total Print Time)</dt>
+        <dd>{{printer.LubeMaintInt}} hrs</dd>
+      </dl>
+      <form class="form">
+        <button type="button" class="btn btn-default maint-btn">Lubr. Maintenance Performed</button>
+      </form>
+    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+            
+  </div> <!-- row -->
+  <div class="row">
+    <h2 class="h3">Prints From This Printer</h2>
+    <div>
+      <div *ngFor="let print of printer.Prints" class="pull-left">
+        <a [routerLink]="['/prints/printdetails', print.PrintId]" >
+          <div class="print-container text-center">
+            <img [src]=print.MainPrintImageUrl class="print-image center-block"/>
+            <span>{{print.Name}}</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  
+</div> <!-- col-md-10 -->
+

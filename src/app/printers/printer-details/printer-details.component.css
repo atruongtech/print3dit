@@ -1,0 +1,13 @@
+.print-container {
+    width:150px;
+    height: 200px;
+    margin:10px;
+}
+
+.print-image{
+    max-height:150px;
+    max-width: 150px;
+    padding: 4px;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}

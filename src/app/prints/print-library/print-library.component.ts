@@ -8,7 +8,7 @@ import { Auth } from '../../common/services/auth0/auth0.service';
 @Component({
   selector: 'app-print-library',
   templateUrl: './print-library.component.html',
-  styleUrls: ['../../common/libraries/libraries.css'],
+  styleUrls: ['../../common/css/libraries/libraries.css'],
 })
 export class PrintLibraryComponent implements OnInit {
   app_user_id: number;
