@@ -65,7 +65,7 @@
     </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
             
   </div> <!-- row -->
-  <div class="row">
+  <div class="row" *ngIf="printer.Prints">
     <h2 class="h3">Prints From This Printer</h2>
     <div>
       <div *ngFor="let print of printer.Prints" class="pull-left">
