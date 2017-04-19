@@ -32,7 +32,7 @@ export class PrinterDetailView {
   WireMaintLast: number;
   MainPrinterImageUrl: string;
   UserPrinterId: number;
-  Prints: PrintsPrinterView[];
+  Prints: PrintPrinterView[];
 }
 
 export class PrinterLibraryView {
@@ -46,7 +46,7 @@ export class PrinterLibraryView {
   UserPrinterId: number;
 }
 
-export class PrintsPrinterView {
+export class PrintPrinterView {
   PrintId: number;
   Name: string;
   MainPrintImageUrl: string;
