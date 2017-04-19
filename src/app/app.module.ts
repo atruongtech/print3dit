@@ -6,9 +6,11 @@ import { AlertModule } from 'ng2-bootstrap';
 
 import { PrintsModule } from './prints/prints.module';
 import { PrintersModule } from './printers/printers.module';
+import { FilamentsModule } from './filaments/filaments.module';
 import { RoutingModule} from './routing/routing.module';
 
-import { Auth } from './common/services/auth0/auth0.service'
+import { Auth } from './common/services/auth0/auth0.service';
+import { AuthguardService } from './common/services/authguard/authguard.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -25,13 +27,14 @@ import { AppCommonModule } from './common/app-common.module';
     AppCommonModule,
     PrintsModule,
     PrintersModule,
+    FilamentsModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     RoutingModule,
     AlertModule.forRoot()
   ],
-  providers: [Auth],
+  providers: [Auth, AuthguardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

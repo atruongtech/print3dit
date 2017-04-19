@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FILAMENTLIBRARY, FILAMENTDETAILS, FILAMENTCOLORS, FILAMENTMATERIALS } from './mockfilaments';
 
 @Injectable()
-export class MockfilamentsService {
+export class FilamentsService {
 
   constructor() { }
 
@@ -31,6 +31,7 @@ export class FilamentLibraryView {
   Material: string;
   Brand: string;
   Color: string;
+  HtmlColor: string;
 }
 
 export class FilamentDetailView {
@@ -42,7 +43,7 @@ export class FilamentDetailView {
   Color: string;
   Prints: PrintFilamentView[];
   LengthRemain: number;
-  DateAcquired: number;
+  DateAcquired: Date;
   Source: string;
 }
 

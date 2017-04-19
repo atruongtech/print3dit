@@ -7,7 +7,8 @@ export const FILAMENTLIBRARY: FilamentLibraryView[] = [
         UserFilamentId: 1,
         Material: "PLA",
         Brand: "Monoprice",
-        Color: "Purple"
+        Color: "Purple",
+        HtmlColor: "#e371f7"
     },
     {
         FilamentId: 2,
@@ -16,6 +17,7 @@ export const FILAMENTLIBRARY: FilamentLibraryView[] = [
         Material: "PLA",
         Brand: "Hatchbox",
         Color: "Blue",
+        HtmlColor: "#93f9f4"
     },
     {
         FilamentId: 3,
@@ -24,6 +26,7 @@ export const FILAMENTLIBRARY: FilamentLibraryView[] = [
         Material: "PETG",
         Brand: "Inland",
         Color: "Black",
+        HtmlColor: "#000000"
     }
 ]
 

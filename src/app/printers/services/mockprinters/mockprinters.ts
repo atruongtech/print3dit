@@ -1,4 +1,4 @@
-import { PrinterDetailView, PrinterLibraryView, PrintsPrinterView } from './mockprinters.service';
+import { PrinterDetailView, PrinterLibraryView, PrintPrinterView } from './mockprinters.service';
 
 export const PRINTERDETAILS: PrinterDetailView[] = [
     {PrinterId: 1,
