@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import { PrintsService, PrintDetailView } from '../services/mockprints/mockprints.service';
 
 @Component({
+  selector: 'app-print-details',
   templateUrl: './print-details.component.html',
   styleUrls: ['../../common/css/details/details.css']
 })

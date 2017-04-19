@@ -45,13 +45,13 @@ export class PrintLibraryComponent implements OnInit {
 
 
   ngOnInit() {
-    if (!this.auth.authenticated()) {
-      // send user back to home page if not signed in.
-      this.router.navigateByUrl("");
-    }
+
     if (localStorage.getItem("profile") != null ) {
       let userProfile: any = localStorage.getItem("profile");
       this.app_user_id = JSON.parse(userProfile).app_metadata.app_user_id;
+    }
+    else {
+
     }
     
 
