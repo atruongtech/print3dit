@@ -4,24 +4,37 @@ import { CommonModule } from '@angular/common';
 
 import { AuthguardService } from '../common/services/authguard/authguard.service';
 
+import { PrintBaseComponent } from './print-base/print-base.component';
 import { PrintLibraryComponent } from './print-library/print-library.component';
 import { PrintDetailsComponent } from './print-details/print-details.component';
 
 export const printRoutes : Routes = [
   {
     path: 'prints', 
-    component: PrintLibraryComponent,
-    canActivate: [ AuthguardService ]
+    component: PrintBaseComponent,
+    canActivate: [ AuthguardService ],
+    children: [
+      {
+        path: "",
+        canActivateChild: [ AuthguardService ],
+        children: [
+          {
+            path: 'printdetails/:id', 
+            component: PrintDetailsComponent,
+          },
+          {
+            path: 'printdetails/:id/edit',
+            redirectTo: "/prints"
+          } ,
+          {
+            path: "",
+            component: PrintLibraryComponent
+          }
+        ]
+      }
+    ]
   },        
-  {
-    path: 'prints/printdetails/:id', 
-    component: PrintDetailsComponent,
-    canActivate: [ AuthguardService ] 
-  },
-  {
-    path: 'prints/printdetails/:id/edit',
-    redirectTo: "/prints"
-  }    
+    
 ]
 
 

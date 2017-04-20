@@ -1,7 +1,4 @@
-<div class="col-md-2">
-    <app-side-nav></app-side-nav>
-</div> <!--col-md-2 -->
-<div class="col-md-10" *ngIf="print">
+<ng-container *ngIf="print">
   <img class="center-block" id="main-image" [src]=print.MainPrintImageUrl/>
   <h1 class="h2 text-center center-block"><strong>{{print.Name}}</strong></h1>
   <hr/>
@@ -46,5 +43,5 @@
   </div> <!-- row -->
 
 
-</div> <!-- col-md-10 -->
+</ng-container> <!-- col-md-10 -->
 
