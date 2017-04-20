@@ -8,6 +8,7 @@ import { PrinterLibraryComponent } from './printer-library/printer-library.compo
 import { PrintersService } from './services/mockprinters/mockprinters.service';
 import { AppCommonModule } from '../common/app-common.module';
 import { PrinterDetailsComponent } from './printer-details/printer-details.component';
+import { PrinterBaseComponent } from './printer-base/printer-base.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { PrinterDetailsComponent } from './printer-details/printer-details.compo
     PrintersRoutingModule,
     FormsModule
   ],
-  declarations: [PrinterLibraryComponent, PrinterDetailsComponent],
+  declarations: [PrinterLibraryComponent, PrinterDetailsComponent, PrinterBaseComponent],
   providers: [PrintersService]
 })
 export class PrintersModule { }
