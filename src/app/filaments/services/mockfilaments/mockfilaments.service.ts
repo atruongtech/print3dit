@@ -45,6 +45,7 @@ export class FilamentDetailView {
   LengthRemain: number;
   DateAcquired: Date;
   Source: string;
+  HtmlColor: string;
 }
 
 export class FilamentColor {

@@ -9,7 +9,7 @@ import {
 import { Auth } from '../auth0/auth0.service';
 
 @Injectable()
-export class AuthguardService implements CanActivate{
+export class AuthguardService implements CanActivate, CanActivateChild{
 
   constructor(private auth: Auth
               , private router: Router) { }
@@ -33,6 +33,10 @@ export class AuthguardService implements CanActivate{
       }
     }
     return false;
+  }
+
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.canActivate(route, state);
   }
 
 }

@@ -45,6 +45,7 @@ export const FILAMENTDETAILS: FilamentDetailView[] = [
             { PrintId: 1, Name: "3D Benchy", MainPrintImageUrl: "assets/images/benchy.JPG"}, 
             { PrintId: 2, Name: "Fidget Spinner", MainPrintImageUrl: "assets/images/benchy.JPG"}
         ],
+        HtmlColor: "#e371f7"
     },
     {
         FilamentId: 2,
@@ -56,7 +57,8 @@ export const FILAMENTDETAILS: FilamentDetailView[] = [
         LengthRemain: 100,
         DateAcquired: new Date("4/3/2017"),
         Source: "Microcenter",
-        Prints: undefined
+        Prints: undefined,
+        HtmlColor: "#93f9f4"
     },
     {
         FilamentId: 3,
@@ -68,7 +70,8 @@ export const FILAMENTDETAILS: FilamentDetailView[] = [
         LengthRemain: 100,
         DateAcquired: new Date("4/3/2017"),
         Source: "Microcenter",
-        Prints: undefined
+        Prints: undefined,
+        HtmlColor: "#000000"
     }
 ]
 

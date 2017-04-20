@@ -18,7 +18,7 @@ import { FilamentsService } from './services/mockfilaments/mockfilaments.service
     FormsModule
   ],
   providers: [
-    FilamentsService
+    FilamentsService,
   ],
   declarations: [FilamentLibraryComponent, FilamentDetailsComponent, FilamentsBaseComponent]
 })

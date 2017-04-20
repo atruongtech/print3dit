@@ -1,15 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+
+import { FilamentDetailView } from '../services/mockfilaments/mockfilaments.service';
 
 @Component({
   selector: 'app-filament-details',
   templateUrl: './filament-details.component.html',
-  styleUrls: ['./filament-details.component.css']
+  styleUrls: ['../../common/css/details/details.css', './filament-details.component.css']
 })
 export class FilamentDetailsComponent implements OnInit {
 
-  constructor() { }
+  filament: FilamentDetailView;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.data
+      .subscribe((data: {filament: FilamentDetailView}) => {
+        this.filament = data.filament;
+      })
   }
 
 }

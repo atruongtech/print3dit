@@ -21,14 +21,18 @@
     <th>Spool</th>
     <th>Material</th>
     <th>Brand</th>
-    <th>Color</th>
-    <th><span class="sr-only">Color Sample</span></th>
+    <th>Color Family</th>
+    <th>Color Swatch</th>
   </thead>
-  <tr *ngFor="let filament of displayFilaments">
-    <td>{{filament.UserFilamentId}}</td>
-    <td>{{filament.Material}}</td>
-    <td>{{filament.Brand}}</td>
-    <td>{{filament.Color}}</td>
-    <td><div class="color-sample" [style.background]="filament.HtmlColor"></div></td>
-  </tr>
+  <tbody>
+    <ng-container *ngFor="let filament of displayFilaments">
+      <tr>
+        <td><a [routerLink]="['filamentdetails',filament.FilamentId]" class="rowlink">{{filament.UserFilamentId}}</a></td>
+        <td>{{filament.Material}}</td>
+        <td>{{filament.Brand}}</td>
+        <td>{{filament.Color}}</td>
+        <td><div class="color-sample" [style.background]="filament.HtmlColor"></div></td>
+      </tr>
+    </ng-container>
+  </tbody>
 </table>
