@@ -11,7 +11,7 @@
         <div class="">
           <select class="form-control" name="filamentSelect" [(ngModel)]="selectedFilament">
             <option value="" selected>Any filament</option>
-            <option *ngFor="let filament of filamentOptions">{{filament.Name}}</option>
+            <option *ngFor="let filament of filamentOptions">{{filament.FilamentName}}</option>
           </select>
         </div>
       </div> <!-- form-group col-md-4 -->
@@ -21,7 +21,7 @@
         <div class="">
           <select class="form-control" name="printerSelect" [(ngModel)]="selectedPrinter">
             <option value="" selected>Any printer</option>
-            <option *ngFor="let printer of printerOptions">{{printer.Name}}</option>
+            <option *ngFor="let printer of printerOptions">{{printer.PrinterName}}</option>
           </select>
         </div>
       </div> <!-- form-group col-md-4 col-md-offset-6 -->
@@ -43,7 +43,7 @@
             <img [src]=print.MainPrintImageUrl class="center-block display-image"/>
           </div>
           <div class="display-info">
-            <p class="text-center"><strong>{{print.Name}}</strong></p>
+            <p class="text-center"><strong>{{print.PrintName}}</strong></p>
             <p class="text-center">{{print.FilamentName}}</p>
             <p class="text-center">{{print.PrinterName}}</p>
             <p class="text-center" *ngIf="print.Success == true">Success!</p>

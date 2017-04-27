@@ -44,7 +44,7 @@ export class FilamentDetailView {
   Prints: PrintFilamentView[];
   LengthRemain: number;
   DateAcquired: Date;
-  Source: string;
+  FilamentSource: string;
   HtmlColor: string;
 }
 

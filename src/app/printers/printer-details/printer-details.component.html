@@ -9,7 +9,7 @@
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <dl>
         <dt>Name</dt>
-        <dd>{{printer.Name}}</dd>
+        <dd>{{printer.PrinterName}}</dd>
         <dt>Total Print Time</dt>
         <dd>{{printer.PrintTimeHours}} hrs</dd>
         <dt>Number of Prints</dt>
@@ -22,7 +22,7 @@
         <dt>Date Acquired</dt>
         <dd>{{printer.DateAcquired.toLocaleDateString()}}</dd>
         <dt>Source</dt>
-        <dd>{{printer.Source}}</dd>
+        <dd>{{printer.PrinterSource}}</dd>
         <dt>Printer Id</dt>
         <dd>{{printer.UserPrinterId}}</dd>
       </dl>
@@ -70,7 +70,7 @@
         <a [routerLink]="['/prints/printdetails', print.PrintId]" >
           <div class="print-container text-center">
             <img [src]=print.MainPrintImageUrl class="print-image center-block"/>
-            <span>{{print.Name}}</span>
+            <span>{{print.PrintName}}</span>
           </div>
         </a>
       </div>

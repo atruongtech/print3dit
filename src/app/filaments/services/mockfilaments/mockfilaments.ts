@@ -40,7 +40,7 @@ export const FILAMENTDETAILS: FilamentDetailView[] = [
         Color: "Purple",
         LengthRemain: 100,
         DateAcquired: new Date("4/3/2017"),
-        Source: "Monoprice",
+        FilamentSource: "Monoprice",
         Prints: [ 
             { PrintId: 1, Name: "3D Benchy", MainPrintImageUrl: "assets/images/benchy.JPG"}, 
             { PrintId: 2, Name: "Fidget Spinner", MainPrintImageUrl: "assets/images/benchy.JPG"}
@@ -56,7 +56,7 @@ export const FILAMENTDETAILS: FilamentDetailView[] = [
         Color: "Blue",
         LengthRemain: 100,
         DateAcquired: new Date("4/3/2017"),
-        Source: "Microcenter",
+        FilamentSource: "Microcenter",
         Prints: undefined,
         HtmlColor: "#93f9f4"
     },
@@ -69,7 +69,7 @@ export const FILAMENTDETAILS: FilamentDetailView[] = [
         Color: "Black",
         LengthRemain: 100,
         DateAcquired: new Date("4/3/2017"),
-        Source: "Microcenter",
+        FilamentSource: "Microcenter",
         Prints: undefined,
         HtmlColor: "#000000"
     }

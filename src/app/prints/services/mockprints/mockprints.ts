@@ -3,7 +3,7 @@ import { PrintDetailView, FilamentPrintsView, PrinterPrintsView } from './mockpr
 export const PRINTS: PrintDetailView[] = [
     // represents a returned VIEW. Not necessarily the entity
     {PrintId: 1, 
-        Name: "3D Benchy", 
+        PrintName: "3D Benchy", 
         SourceUrl: "http://www.thingiverse.com/thing:763622", 
         ModelPath: "", 
         Success: true,
@@ -18,7 +18,7 @@ export const PRINTS: PrintDetailView[] = [
         Date: new Date("4/11/2017"),
         PrintConfigId: 1},
     {PrintId: 2, 
-        Name: "Fidget spinner", 
+        PrintName: "Fidget spinner", 
         SourceUrl: "http://www.thingiverse.com/thing:763622", 
         ModelPath: "", 
         Success: true,
@@ -33,7 +33,7 @@ export const PRINTS: PrintDetailView[] = [
         Date: new Date("4/11/2017"),
         PrintConfigId: 1},
     {PrintId: 3, 
-        Name: "Baby groot", 
+        PrintName: "Baby groot", 
         SourceUrl: "http://www.thingiverse.com/thing:763622", 
         ModelPath: "", 
         Success: true,
@@ -48,7 +48,7 @@ export const PRINTS: PrintDetailView[] = [
         Date: new Date("4/11/2017"),
         PrintConfigId: 1},
     {PrintId: 4, 
-        Name: "Spool Holder", 
+        PrintName: "Spool Holder", 
         SourceUrl: "http://www.thingiverse.com/thing:763622", 
         ModelPath: "", 
         Success: true,
@@ -63,7 +63,7 @@ export const PRINTS: PrintDetailView[] = [
         Date: new Date("4/11/2017"),
         PrintConfigId: 1},
     {PrintId: 5, 
-        Name: "Ninja Stars", 
+        PrintName: "Ninja Stars", 
         SourceUrl: "http://www.thingiverse.com/thing:763622", 
         ModelPath: "", 
         Success: true,
@@ -80,11 +80,11 @@ export const PRINTS: PrintDetailView[] = [
 ]
 
 export const FILAMENTSPRINTSLIBRARYVIEW: FilamentPrintsView[] = [
-    {Name: "Monoprice PLA (White) - Spool 1", UserId: 1, FilamentId: 1},
-    {Name: "Hatchbox PLA (Gray) - Spool 3", UserId: 1, FilamentId: 2},
-    {Name: "Inland PETG (Black) - Spool 4", UserId: 2, FilamentId: 3}
+    {FilamentName: "Monoprice PLA (White) - Spool 1", UserId: 1, FilamentId: 1},
+    {FilamentName: "Hatchbox PLA (Gray) - Spool 3", UserId: 1, FilamentId: 2},
+    {FilamentName: "Inland PETG (Black) - Spool 4", UserId: 2, FilamentId: 3}
 ]
 
 export const PRINTERSPRINTSLIBRARYVIEW: PrinterPrintsView[] = [
-    {Name: "Maker Select - Printer 1", UserId: 1, PrinterId: 1}
+    {PrinterName: "Maker Select - Printer 1", UserId: 1, PrinterId: 1}
 ]

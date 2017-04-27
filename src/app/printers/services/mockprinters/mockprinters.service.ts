@@ -19,11 +19,11 @@ export class PrintersService {
 export class PrinterDetailView {
   PrinterId: number;
   UserId: number;
-  Name: string;
+  PrinterName: string;
   DateAcquired: Date;
   NumberOfPrints: number;
   PrintTimeHours: number;
-  Source: string;  
+  PrinterSource: string;  
   BeltMaintInt: number;
   BeltMaintLast: number;
   LubeMaintInt: number;
@@ -38,7 +38,7 @@ export class PrinterDetailView {
 export class PrinterLibraryView {
   PrinterId: number;
   UserId: number;
-  Name: string;
+  PrinterName: string;
   DateAcquired: Date;
   NumberOfPrints: number;
   PrintTimeHours: number;
@@ -48,6 +48,6 @@ export class PrinterLibraryView {
 
 export class PrintPrinterView {
   PrintId: number;
-  Name: string;
+  PrintName: string;
   MainPrintImageUrl: string;
 }

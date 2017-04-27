@@ -13,7 +13,7 @@ export class Auth {
   // Configure Auth0
   options: any = {
     auth: {
-      redirectUrl: "http://ec2-34-209-3-213.us-west-2.compute.amazonaws.com:4200/login",
+      redirectUrl: window.location.href,
       responseType: "token"
     }
   }

@@ -10,7 +10,7 @@ import { Auth } from '../../common/services/auth0/auth0.service';
 })
 export class BrandBarComponent implements OnInit {
 
-  constructor(private auth: Auth
+  constructor(public auth: Auth
               ,private router: Router) { }
 
   public logout() {

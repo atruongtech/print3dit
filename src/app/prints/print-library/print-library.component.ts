@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { PrintsService, PrintDetailView, FilamentPrintsView, PrinterPrintsView } from '../services/mockprints/mockprints.service';
-import { Auth } from '../../common/services/auth0/auth0.service';
 
 
 @Component({
@@ -23,7 +22,7 @@ export class PrintLibraryComponent implements OnInit {
   selectedFilament: string;
   selectedPrinter: string;
 
-  constructor(private printsService: PrintsService, private auth: Auth, private router: Router) { 
+  constructor(private printsService: PrintsService, private router: Router) { 
     
   }
 
@@ -31,7 +30,7 @@ export class PrintLibraryComponent implements OnInit {
   applySearch(): void {
     let filteredPrints = this.allPrints;
     if (this.printSearchTxt){
-      filteredPrints = filteredPrints.filter(print => print.Name.toLowerCase().includes(this.printSearchTxt.toLowerCase())); 
+      filteredPrints = filteredPrints.filter(print => print.PrintName.toLowerCase().includes(this.printSearchTxt.toLowerCase())); 
     }
     if (this.selectedFilament) {
       filteredPrints = filteredPrints.filter(print => print.FilamentName == this.selectedFilament);

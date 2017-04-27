@@ -7,7 +7,7 @@ import { Auth } from '../common/services/auth0/auth0.service'
 export class HomeComponent implements OnInit {
     name: string;
 
-    constructor(private auth: Auth){
+    constructor(public auth: Auth){
     }
 
     ngOnInit(){

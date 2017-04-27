@@ -23,7 +23,7 @@ export class PrintsService
 
 export class PrintDetailView {
     PrintId: number;
-    Name: string;
+    PrintName: string;
     SourceUrl: string;
     ModelPath: string;
     Success: boolean;
@@ -41,12 +41,12 @@ export class PrintDetailView {
 
 export class PrinterPrintsView {
     UserId: number;
-    Name: string;
+    PrinterName: string;
     PrinterId: number;
 }
 
 export class FilamentPrintsView {
     UserId: number;
-    Name: string;
+    FilamentName: string;
     FilamentId: number;
 }
