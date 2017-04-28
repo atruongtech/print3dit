@@ -30,10 +30,12 @@ export class PrintDetailView {
     PrintTimeHours: number;
     PrintTimeMinutes: number;
     MainPrintImageUrl: string;
+    FilamentId: number;
     FilamentName: string;
+    PrinterId: number;
     PrinterName: string;
     UserId: number;
-    Date: Date;
+    PrintDate: Date;
     ModelFileUrl: string;
     LengthUsed: number;
     PrintConfigId: number;
