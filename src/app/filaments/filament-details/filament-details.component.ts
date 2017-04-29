@@ -12,13 +12,14 @@ export class FilamentDetailsComponent implements OnInit {
 
   filament: FilamentDetailView;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     this.route.data
       .subscribe((data: {filament: FilamentDetailView}) => {
         this.filament = data.filament;
-      })
+      },
+      error => {console.log(error); this.router.navigate(['/error']);});
   }
 
 }

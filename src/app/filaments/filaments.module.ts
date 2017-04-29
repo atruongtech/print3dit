@@ -8,7 +8,7 @@ import { FilamentRoutingModule } from './filament-routing.module';
 import { FilamentLibraryComponent } from './filament-library/filament-library.component';
 import { FilamentDetailsComponent } from './filament-details/filament-details.component';
 import { FilamentsBaseComponent } from './filaments-base/filaments-base.component';
-import { FilamentsService } from './services/mockfilaments/mockfilaments.service';
+import { FilamentsService } from './services/filaments/filaments.service';
 
 @NgModule({
   imports: [

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FilamentLibraryView, FilamentsService } from '../services/mockfilaments/mockfilaments.service';
+import { FilamentDetailView, FilamentsService } from '../services/filaments/filaments.service';
 
 @Component({
   selector: 'app-filament-library',
@@ -12,8 +12,10 @@ export class FilamentLibraryComponent implements OnInit {
   app_user_id: number;
   searchTxt: string;
 
-  allFilaments: FilamentLibraryView[];
-  displayFilaments: FilamentLibraryView[];
+  allFilaments: FilamentDetailView[];
+  displayFilaments: FilamentDetailView[];
+
+  is_error: Boolean = false;
 
   constructor(private filamentsService: FilamentsService) { }
 
@@ -27,8 +29,12 @@ export class FilamentLibraryComponent implements OnInit {
     }
 
     this.filamentsService.getFilaments(this.app_user_id)
-      .then(filaments => this.allFilaments = filaments)
-      .then(filaments => this.displayFilaments = this.allFilaments);
+        .subscribe(
+          filaments => { this.allFilaments = filaments; this.displayFilaments = filaments },
+          error => { console.error(error); this.is_error = true; }
+        )
+      // .then(filaments => this.allFilaments = filaments)
+      // .then(filaments => this.displayFilaments = this.allFilaments);
   }
 
   applySearch(): void {
