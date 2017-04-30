@@ -23,9 +23,15 @@ export class FilamentDetailsResolver implements Resolve<FilamentDetailView>{
           return filament;
         }
         else {
-          this.router.navigate(['/filaments']);
+          this.router.navigate(['/404']);
           return null;
         }
-      }).first()
+      })
+      .catch(error => {
+          // service has already logged error in console.
+          this.router.navigate(['/error']); 
+          return Observable.throw(error)
+        })
+      .first()
   }
 }

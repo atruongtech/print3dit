@@ -1,14 +1,18 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
-import { HomeComponent} from '../home/home.component';
+import { HomeComponent} from '../core//home/home.component';
 import { LoginComponent } from '../common/login/login.component';
 import { ErrorComponent } from '../core/error/error.component';
+import { NotFoundComponent } from '../core/not-found/not-found.component';
 
 const appRoutes : Routes = [
-    {path: '', component: HomeComponent},
+    
     {path: 'login', component: LoginComponent },
-    {path: 'error', component: ErrorComponent}
+    {path: 'error', component: ErrorComponent},
+    {path: '', component: HomeComponent},
+    {path: '404', component: NotFoundComponent},
+    {path: '**', component: NotFoundComponent}
 ]
 
 @NgModule({

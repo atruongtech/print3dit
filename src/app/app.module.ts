@@ -13,10 +13,11 @@ import { Auth } from './common/services/auth0/auth0.service';
 import { AuthguardService } from './common/services/authguard/authguard.service';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './core/home/home.component';
 import { BrandBarComponent } from './core/brand-bar/brand-bar.component';
 import { AppCommonModule } from './common/app-common.module';
 import { ErrorComponent } from './core/error/error.component';
+import { NotFoundComponent } from './core/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ErrorComponent } from './core/error/error.component';
     HomeComponent,
     BrandBarComponent,
     ErrorComponent,
+    NotFoundComponent,
   ],
   imports: [
     AppCommonModule,

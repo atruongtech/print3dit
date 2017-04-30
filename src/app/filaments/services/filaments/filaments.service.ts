@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/timeout'
 
 import { environment } from '../../../../environments/environment'
 
@@ -22,12 +23,14 @@ export class FilamentsService {
   getFilaments(userId: number): Observable<FilamentDetailView[]> {
     // make the request
     return this.http.get(this.environment.RES_URI + this.allFilaments + '/' + userId)
+              .timeout(3000)
               .map(res => {return this.extractData(res)})
               .catch(this.handleError);
   } 
 
   getFilamentById(Id: number): Observable<FilamentDetailView> {
     return this.http.get(this.environment.RES_URI + this.filamentById + '/' + Id)
+              .timeout(3000)
               .map(res => {return this.extractData(res)})
               .catch(this.handleError);
   }
@@ -53,6 +56,7 @@ export class FilamentsService {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
+    console.log("There was an error!");
     return Observable.throw(errMsg);
   }
 
