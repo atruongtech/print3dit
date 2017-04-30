@@ -13,8 +13,8 @@ export class Auth {
   // Configure Auth0
   options: any = {
     auth: {
-      redirectUrl: window.location.href,
-      responseType: "token"
+      redirectUrl: window.location.origin + '/login',
+      responseType: "token",
     }
   }
   lock = new Auth0Lock('sDfOrQe1VAPSBGViYgUGJUHXyzSgEgMC', 'print3dstats.auth0.com', this.options);

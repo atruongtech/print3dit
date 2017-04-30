@@ -16,7 +16,7 @@ export class AuthguardService implements CanActivate, CanActivateChild{
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (!this.auth.authenticated() || !localStorage.getItem("profile")) {
-      this.router.navigateByUrl("login");
+      this.router.navigate(['/login']);
     }
     if (!this.checkForUserId()) {
       return false;
