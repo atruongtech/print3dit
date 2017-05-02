@@ -3,7 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
-import { PrintsService, PrintDetailView } from '../services/mockprints/mockprints.service';
+import { PrintsService, PrintDetailView } from '../services/prints/prints.service';
 
 @Component({
   selector: 'app-print-details',
@@ -19,10 +19,12 @@ export class PrintDetailsComponent implements OnInit {
               ,private printsService: PrintsService) { }
 
   ngOnInit() {
-    this.route.params
-    // (+) converts string 'id' to a number
-    .switchMap((params: Params) => this.printsService.getPrintById(+params['id']))
-    .subscribe((print: PrintDetailView) => this.print = print);
+    this.route.data
+      .subscribe(
+        (data: {print: PrintDetailView}) => {
+          this.print = data.print;
+        },
+      error => {console.log("error reached final destination"); console.log(error); this.router.navigate(['/error']);});
 
     
   }

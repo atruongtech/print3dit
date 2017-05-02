@@ -11,7 +11,7 @@
         <div class="">
           <select class="form-control" name="filamentSelect" [(ngModel)]="selectedFilament">
             <option value="" selected>Any filament</option>
-            <option *ngFor="let filament of filamentOptions">{{filament.FilamentName}}</option>
+            <option *ngFor="let filament of filamentOptions" [ngValue]="filament">{{filament.FilamentName}}</option>
           </select>
         </div>
       </div> <!-- form-group col-md-4 -->
@@ -21,7 +21,7 @@
         <div class="">
           <select class="form-control" name="printerSelect" [(ngModel)]="selectedPrinter">
             <option value="" selected>Any printer</option>
-            <option *ngFor="let printer of printerOptions">{{printer.PrinterName}}</option>
+            <option *ngFor="let printer of printerOptions" [ngValue]="printer">{{printer.PrinterName}}</option>
           </select>
         </div>
       </div> <!-- form-group col-md-4 col-md-offset-6 -->

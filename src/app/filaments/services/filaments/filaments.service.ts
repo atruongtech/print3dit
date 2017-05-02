@@ -42,8 +42,6 @@ export class FilamentsService {
   private extractData(res: Response) {
     let body = res.json();
     return body.data || { };
-    // console.log(JSON.parse(testJson).data);
-    // return JSON.parse(testJson).data;
   }
 
   private handleError (error: Response | any) {

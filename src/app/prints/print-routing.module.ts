@@ -7,6 +7,7 @@ import { AuthguardService } from '../common/services/authguard/authguard.service
 import { PrintBaseComponent } from './print-base/print-base.component';
 import { PrintLibraryComponent } from './print-library/print-library.component';
 import { PrintDetailsComponent } from './print-details/print-details.component';
+import { PrintDetailsResolver } from './services/print-details-resolver/print-details-resolver.service';
 
 export const printRoutes : Routes = [
   {
@@ -21,6 +22,9 @@ export const printRoutes : Routes = [
           {
             path: 'printdetails/:id', 
             component: PrintDetailsComponent,
+            resolve : {
+              print: PrintDetailsResolver
+            }
           },
           {
             path: 'printdetails/:id/edit',
@@ -44,6 +48,9 @@ export const printRoutes : Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    PrintDetailsResolver
   ]
 })
 export class PrintRoutingModule { }

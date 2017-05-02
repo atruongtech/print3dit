@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { PrintsService, PrintDetailView, FilamentPrintsView, PrinterPrintsView } from '../services/mockprints/mockprints.service';
+import { PrintsService, PrintDetailView, FilamentPrintsView, PrinterPrintsView } from '../services/prints/prints.service';
 
 
 @Component({
@@ -19,8 +19,8 @@ export class PrintLibraryComponent implements OnInit {
   printerOptions: PrinterPrintsView[];
 
   printSearchTxt: string;
-  selectedFilament: string;
-  selectedPrinter: string;
+  selectedFilament: any;
+  selectedPrinter: any;
 
   constructor(private printsService: PrintsService, private router: Router) { 
     
@@ -33,10 +33,10 @@ export class PrintLibraryComponent implements OnInit {
       filteredPrints = filteredPrints.filter(print => print.PrintName.toLowerCase().includes(this.printSearchTxt.toLowerCase())); 
     }
     if (this.selectedFilament) {
-      filteredPrints = filteredPrints.filter(print => print.FilamentName == this.selectedFilament);
+      filteredPrints = filteredPrints.filter(print => print.FilamentId == this.selectedFilament.FilamentId);
     }
     if (this.selectedPrinter) {
-      filteredPrints = filteredPrints.filter(print => print.PrinterName == this.selectedPrinter);
+      filteredPrints = filteredPrints.filter(print => print.PrinterId == this.selectedPrinter.PrinterId);
     }
     
     this.displayPrints = filteredPrints;
@@ -54,13 +54,32 @@ export class PrintLibraryComponent implements OnInit {
     }
     
 
-    this.printsService.getFilaments(this.app_user_id)
-      .then(filaments => this.filamentOptions = filaments);
+    this.printsService.getFilamentOptions(this.app_user_id)
+      .subscribe(
+        filaments => { 
+          this.filamentOptions = filaments
+        }
+        ,error => {
+          console.error(error);
+          this.router.navigate(['/error']);
+        });
     this.printsService.getPrints(this.app_user_id)
-      .then(prints => this.allPrints = prints)
-      .then(prints => this.displayPrints = prints);
-    this.printsService.getPrinters(this.app_user_id)
-      .then(printers => this.printerOptions = printers);
+      .subscribe(
+        prints => {
+          this.allPrints = prints; 
+          this.displayPrints = prints;
+        },
+        error => {
+          console.error(error);
+          this.router.navigate(['/error']);
+        })
+    this.printsService.getPrinterOptions(this.app_user_id)
+      .subscribe(
+        printers => this.printerOptions = printers,
+        error => {
+          console.error(error);
+          this.router.navigate(['/error']);
+        });
 
     // initialize select boxes or else they are empty
     this.selectedFilament = "";
