@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 import { PrintersRoutingModule } from './printers-routing.module'
 import { PrinterLibraryComponent } from './printer-library/printer-library.component';
-import { PrintersService } from './services/mockprinters/mockprinters.service';
+import { PrintersService } from './services/printers/printers.service';
 import { AppCommonModule } from '../common/app-common.module';
 import { PrinterDetailsComponent } from './printer-details/printer-details.component';
 import { PrinterBaseComponent } from './printer-base/printer-base.component';

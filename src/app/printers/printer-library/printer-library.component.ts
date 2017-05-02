@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { PrintersService, PrinterLibraryView } from '../services/mockprinters/mockprinters.service';
+import { PrintersService, PrinterLibraryView } from '../services/printers/printers.service';
 
 @Component({
   selector: 'app-printer-library',
@@ -35,8 +35,16 @@ export class PrinterLibraryComponent implements OnInit {
     }
 
     this.printersService.getPrinters(this.app_user_id)
-      .then(printers => this.allPrinters = printers)
-      .then(printers => this.displayPrinters = printers);
+      .subscribe(
+        printers => {
+          this.allPrinters = printers;
+          this.displayPrinters = printers;
+        },
+        error => {
+          console.error(error);
+          this.router.navigate(['/error']);
+        }
+      );
   }
 
 }

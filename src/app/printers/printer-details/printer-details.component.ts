@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { PrintersService, PrinterDetailView } from '../services/mockprinters/mockprinters.service';
+import { PrintersService, PrinterDetailView } from '../services/printers/printers.service';
 
 @Component({
   selector: 'app-printer-details',

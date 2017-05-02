@@ -7,6 +7,7 @@ import { AuthguardService } from '../common/services/authguard/authguard.service
 import { PrinterBaseComponent } from './printer-base/printer-base.component';
 import { PrinterLibraryComponent } from './printer-library/printer-library.component';
 import { PrinterDetailsComponent } from './printer-details/printer-details.component';
+import { PrinterDetailsResolver } from './services/printer-details-resolver/printer-details-resolver.service';
 
 const printerRoutes: Routes = [
   {
@@ -18,7 +19,12 @@ const printerRoutes: Routes = [
         path: "",
         canActivateChild: [ AuthguardService ],
         children: [
-          { path:"printerdetails/:id", component: PrinterDetailsComponent},
+          { path:"printerdetails/:id", 
+            component: PrinterDetailsComponent,
+            resolve: {
+              printer: PrinterDetailsResolver
+            }
+          },
           { path:"", component: PrinterLibraryComponent }
         ]
       }
@@ -33,6 +39,9 @@ const printerRoutes: Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    PrinterDetailsResolver
   ]
 })
 export class PrintersRoutingModule { }
