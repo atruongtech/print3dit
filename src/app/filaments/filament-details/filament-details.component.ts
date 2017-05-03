@@ -18,9 +18,15 @@ export class FilamentDetailsComponent implements OnInit {
     this.route.data
       .subscribe(
         (data: {filament: FilamentDetailView}) => {
-          this.filament = data.filament;
+          if (data && data.filament) {
+            this.filament = data.filament;
+          }
         },
-      error => {console.log("error reached final destination"); console.log(error); this.router.navigate(['/error']);});
+        error => {
+          console.log("error reached final destination"); 
+          console.log(error);
+        });
+      
   }
 
 }

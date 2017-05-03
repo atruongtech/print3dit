@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/timeout'
+import 'rxjs/add/operator/timeout';
+import 'rxjs/add/observable/of';
 
 import { environment } from '../../../../environments/environment'
 
@@ -23,14 +24,14 @@ export class FilamentsService {
   getFilaments(userId: number): Observable<FilamentDetailView[]> {
     // make the request
     return this.http.get(this.environment.RES_URI + this.allFilaments + '/' + userId)
-              .timeout(3000)
+              .timeout(60000)
               .map(res => {return this.extractData(res)})
               .catch(this.handleError);
   } 
 
   getFilamentById(Id: number): Observable<FilamentDetailView> {
     return this.http.get(this.environment.RES_URI + this.filamentById + '/' + Id)
-              .timeout(3000)
+              .timeout(60000)
               .map(res => {return this.extractData(res)})
               .catch(this.handleError);
   }
@@ -45,11 +46,15 @@ export class FilamentsService {
   }
 
   private handleError (error: Response | any) {
+    if (error.status == 404) {
+      return Observable.of(null);
+    }
+
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
       const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+      errMsg = `${error.status} - ${error.statusText || ''} `;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
@@ -87,7 +92,7 @@ export class FilamentDetailView {
 export class PrintFilamentView {
   PrintId: number;
   MainPrintImageUrl: string;
-  Name: string;
+  PrintName: string;
 }
 
 const testJson = `{

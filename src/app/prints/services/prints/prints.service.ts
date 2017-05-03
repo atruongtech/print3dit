@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/timeout'
+import 'rxjs/add/operator/timeout';
+import 'rxjs/add/observable/of';
 
 import { environment } from '../../../../environments/environment'
 
@@ -89,6 +90,10 @@ export class PrintsService {
   }
 
   private handleError (error: Response | any) {
+    if (error.status == 404) {
+      return Observable.of(null);
+    }
+
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';

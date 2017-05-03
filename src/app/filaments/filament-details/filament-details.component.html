@@ -1,7 +1,10 @@
+
 <div *ngIf="filament">
-  <div class='row'>
+  <div class='row main-content'>
+    <div style="margin-bottom:15px"><a [routerLink]="['/filaments']">< Back to Filaments</a></div>
     <div class="color-header" [style.background]="filament.HtmlColor"></div>
     <hr/>
+    <div><a [routerLink]="['edit']">Edit this Filament</a></div>
     <h2 class="h3">Filament Information</h2>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <dl>
@@ -33,7 +36,7 @@
         <a [routerLink]="['/prints/printdetails', print.PrintId]" >
           <div class="print-container text-center">
             <img [src]=print.MainPrintImageUrl class="print-image center-block"/>
-            <span>{{print.Name}}</span>
+            <span>{{print.PrintName}}</span>
           </div>
         </a>
       </div>

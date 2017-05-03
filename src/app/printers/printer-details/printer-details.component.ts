@@ -19,7 +19,7 @@ export class PrinterDetailsComponent implements OnInit {
   public savePrinterEdit() {
     console.log("button clicked");
     this.printersService.updatePrinter(this.printer).
-      subscribe(response => console.log(response));
+      subscribe(response => this.router.navigate(['/printers','printerdetails', response.PrinterId]));
   }
 
   ngOnInit() {

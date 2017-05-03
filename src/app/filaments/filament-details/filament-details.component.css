@@ -4,6 +4,10 @@
     border-radius:5px;
 }
 
+.main-content {
+    padding-left:15px;
+}
+
 .print-container {
     width:150px;
     height: 200px;

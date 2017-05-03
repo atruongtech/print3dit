@@ -1,4 +1,5 @@
 
+<div><a [routerLink]="['/printers']">< Back to Printers</a></div>
 <ng-container *ngIf="printer">
   <img class="center-block" id="main-image" [src]=printer.MainPrinterImageUrl/>
   <h1 class="h2 text-center center-block"><strong>{{printer.PrinterName}} - Printer {{printer.UserPrinterId}}</strong></h1>
@@ -115,7 +116,7 @@
     </div>
 
   </div>
-  <div class="center-block text-center">
+  <div class="center-block text-center" *ngIf="editMode">
     <div class="form-group">
       <button class="btn btn-default" (click)="savePrinterEdit()">Save Changes</button>
     </div>

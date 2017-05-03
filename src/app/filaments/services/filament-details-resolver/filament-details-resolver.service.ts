@@ -4,6 +4,7 @@ import { Router, Resolve, RouterStateSnapshot,
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/first';
+import 'rxjs/add/observable/of';
 
 
 import { FilamentsService, FilamentDetailView } from '../filaments/filaments.service';
@@ -20,18 +21,18 @@ export class FilamentDetailsResolver implements Resolve<FilamentDetailView>{
     return this.filamentsService.getFilamentById(id)
       .map(filament => {
         if (filament) {
+          console.log("found something to return");
           return filament;
         }
         else {
+          console.log("should redirect to 404");
           this.router.navigate(['/404']);
-          return null;
+          return new Observable(null);
         }
       })
       .catch(error => {
-          // service has already logged error in console.
           this.router.navigate(['/error']); 
           return Observable.throw(error)
-        })
-      .first()
+        }).first()
   }
 }

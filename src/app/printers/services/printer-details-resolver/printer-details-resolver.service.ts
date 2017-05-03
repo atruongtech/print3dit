@@ -26,7 +26,11 @@ export class PrinterDetailsResolver implements Resolve<PrinterDetailView>{
         }
       })
       .catch(error => {
-          // service has already logged error in console.
+          if (error.startsWith("404")) {
+            this.router.navigate(['/404']);
+            return Observable.of([]);
+          }
+
           this.router.navigate(['/error']); 
           return Observable.throw(error)
         })
