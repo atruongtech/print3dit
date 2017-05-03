@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -31,6 +31,15 @@ export class PrintersService {
     return this.http.get(this.environment.RES_URI + this.printerById + '/' + printerId)
               .timeout(60000)
               .map(res => {return this.extractData(res)})
+              .catch(this.handleError);
+  }
+
+  public updatePrinter(printer: PrinterDetailView): Observable<PrinterDetailView> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.environment.RES_URI + this.printerById + '/' + printer.PrinterId, JSON.stringify(printer), options)
+              .timeout(60000)
+              .map(res => this.extractData(res))
               .catch(this.handleError);
   }
 

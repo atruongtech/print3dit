@@ -9,18 +9,35 @@ import { PrintersService, PrinterDetailView } from '../services/printers/printer
   styleUrls: ['../../common/css/details/details.css', './printer-details.component.css']
 })
 export class PrinterDetailsComponent implements OnInit {
-
+  private editMode: boolean = false;
   printer: PrinterDetailView;
 
   constructor(private printersService: PrintersService
               ,private route: ActivatedRoute
               ,private router: Router ) { }
 
+  public savePrinterEdit() {
+    console.log("button clicked");
+    this.printersService.updatePrinter(this.printer).
+      subscribe(response => console.log(response));
+  }
+
   ngOnInit() {
-    this.route.params
-    // (+) converts string 'id' to a number
-    .switchMap((params: Params) => this.printersService.getPrinterById(+params['id']))
-    .subscribe((printer: PrinterDetailView) => this.printer = printer);
+    this.route.data
+      .subscribe(
+        (data: {printer: PrinterDetailView}) => {
+          this.printer = data.printer;
+        },
+      error => {
+        console.log("error reached final destination"); 
+        console.log(error); 
+        this.router.navigate(['/error']);
+      });
+
+    this.route.url
+      .subscribe(segments => {if (segments.join("").includes("edit")) { this.editMode = true }})
+
+
   }
 
 }

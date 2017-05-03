@@ -19,12 +19,20 @@ const printerRoutes: Routes = [
         path: "",
         canActivateChild: [ AuthguardService ],
         children: [
+          {
+            path:"printerdetails/:id/edit",
+            component: PrinterDetailsComponent,
+            resolve: {
+              printer: PrinterDetailsResolver
+            }
+          },
           { path:"printerdetails/:id", 
             component: PrinterDetailsComponent,
             resolve: {
               printer: PrinterDetailsResolver
             }
           },
+          
           { path:"", component: PrinterLibraryComponent }
         ]
       }
