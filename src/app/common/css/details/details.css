@@ -1,3 +1,29 @@
+dd {
+    margin-bottom:10px;
+}
+
+
+form .ng-valid.ng-dirty {
+    border-left:4px solid lightgreen;
+}
+
+form .ng-invalid {
+    border-left:4px solid red;
+}
+
+.form-control {
+    max-width:400px;
+}
+
+:not(.input-group) > .form-control {
+    margin-bottom: 10px;
+} 
+
+.input-group {
+    max-width:400px;
+    margin-bottom:10px;
+}
+
 #main-image{
     height:200px;
     width:auto;
@@ -11,6 +37,11 @@
     margin-bottom:30px;
 }
 
-dd {
-    margin-bottom:10px;
+.submit-wrapper {
+    margin-top:20px;
 }
+
+
+
+
+

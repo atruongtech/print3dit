@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { MinIntValidator } from './directives/min-int-validator/min-int-validator.directive';
+
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { LoginComponent } from './login/login.component';
 
@@ -12,13 +14,15 @@ import { LoginComponent } from './login/login.component';
   ],
   declarations: [
       SideNavComponent,
-      LoginComponent
+      LoginComponent,
+      MinIntValidator
     ],
   providers: [
   ],
   exports: [
       SideNavComponent,
-      LoginComponent
+      LoginComponent,
+      MinIntValidator
   ]
 })
 export class AppCommonModule { }
