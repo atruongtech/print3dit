@@ -1,12 +1,17 @@
+<a [routerLink]="['/prints']">< Back to Prints</a>
 <ng-container *ngIf="print">
   <img class="center-block" id="main-image" [src]=print.MainPrintImageUrl/>
   <h1 class="h2 text-center center-block"><strong>{{print.PrintName}}</strong></h1>
+  <a [routerLink]="['edit']" *ngIf="!editMode">Edit this Print</a>
+  <a [routerLink]="['..']" *ngIf="editMode">Stop Editing</a>
   <hr/>
   <div class="clearfix"></div>
-  <div class="row">
+  <div class="row" *ngIf="!editMode">
     <h2 class="h3">Print Information</h2>
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <dl>
+        <dt>Print Name</dt>
+        <dd>{{print.PrintName}}</dd>
         <dt>Date Printed</dt>
         <dd>{{print.PrintDate}}</dd>
         <dt>Source URL</dt>
@@ -14,6 +19,7 @@
         <dt>Model</dt>
         <dd><a *ngIf="print.ModelPath" [href]=print.ModelPath>Click here to download</a></dd> 
       </dl>
+      
     </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <dl>
@@ -21,7 +27,7 @@
         <dd *ngIf="print.Success == true">Yes</dd>
         <dd *ngIf="print.Success == false">No</dd>
         <dt>Print Time</dt>
-        <dd *ngIf="print.PrintTimeMinutes || print.PrintTimeHours">{{print.PrintTimeHours}} hours {{print.PrintTimeMinutes}} minutes</dd>
+        <dd *ngIf="printTimeMinutes || printTimeHours">{{printTimeHours}} hours {{printTimeMinutes}} minutes</dd>
       </dl>
     </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
     <div class="clearfix"></div>
@@ -52,6 +58,67 @@
 
         
   </div> <!-- row -->
+  <form class="form-group" novalidate *ngIf="editMode" #updateForm="ngForm" (ngSubmit)="savePrintUpdate()">      
+      <fieldset>
+        <h2 class="h3">Print Information</h2>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="printName">Print Name</label>
+            <input required class="form-control" name="printName" [(ngModel)]="print.PrintName">
+            <label for="printDate">Date Printed</label>
+            <input required class="form-control" type="date" name="printDate" [(ngModel)]="print.PrintDate">
+            <label for="sourceUrl">Source Url</label>
+            <input class="form-control" name="sourceUrl" type="url" [(ngModel)]="print.SourceUrl">
+          </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            
+            <label for="printTimeHours">Print Time</label>
+            <div class="input-group" style="margin-bottom:15px">
+              <input required ngModel minInt name="printTimeHours" class="form-control" type="number" min="0" [(ngModel)]="printTimeHours">
+              <span class="input-group-addon">hours and</span>
+            </div>            
+            <label for="printTimeMinutes" class="sr-only">Print Time Minutes</label>
+            <div class="input-group">
+              <input required name="printTimeMinutes" class="form-control" type="number" max="60" min="0" [(ngModel)]="printTimeMinutes">
+              <span class="input-group-addon">minutes</span>
+            </div>       
+            <div class="checkbox" style="margin-top:15px">
+              <label for="success">                
+                <input type="checkbox" name="success" [(ngModel)]="print.Success">
+                <span style="font-weight:700">Successful?</span>
+              </label>            
+            </div>     
+          </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      </fieldset>
+      <fieldset>
+        <h2 class="h3">Filament Usage</h2>
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="filamentName">Filament Name</label>
+            <select name="filamentName" class="form-control" [(ngModel)]="selectedFilament">
+              <option *ngFor="let filament of filamentOptions" [ngValue]="filament">{{filament.FilamentName}}</option>
+            </select>
+            <label for="lengthUsed">Length Used</label>
+            <div class="input-group">
+              <input required ngModel minInt class="form-control" type="number" name="lengthUsed" [(ngModel)]="print.LengthUsed">
+              <span class="input-group-addon">meters</span>
+            </div>
+          </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      </fieldset>
+      <fieldset>
+        <h2 class="h3">Printed On</h2>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <label for="printerName">Printer Name</label>
+            <select name="printerName" class="form-control" [(ngModel)]="selectedPrinter">
+              <option *ngFor="let printer of printerOptions" [ngValue]="printer">{{printer.PrinterName}}</option>
+            </select>
+          </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      </fieldset>
+      
+      <div class="center-block text-center submit-wrapper" >
+        <button type="submit" class="btn btn-default" [disabled]="!updateForm.valid || updateForm.pristine">Save Changes</button> 
+      </div>
+      <div class="alert alert-danger" style="margin-top:20px;" [hidden]="updateForm.valid || updateForm.pristine">One or more fields needs attention!</div>
+      
+    </form>
 
 
 </ng-container> <!-- col-md-10 -->

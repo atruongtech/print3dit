@@ -20,16 +20,19 @@ export const printRoutes : Routes = [
         canActivateChild: [ AuthguardService ],
         children: [
           {
+            path: 'printdetails/:id/edit',
+            component: PrintDetailsComponent,
+            resolve: {
+              print: PrintDetailsResolver
+            }
+          } ,
+          {
             path: 'printdetails/:id', 
             component: PrintDetailsComponent,
             resolve : {
               print: PrintDetailsResolver
             }
           },
-          {
-            path: 'printdetails/:id/edit',
-            redirectTo: "/prints"
-          } ,
           {
             path: "",
             component: PrintLibraryComponent

@@ -1,126 +1,127 @@
 
 <div><a [routerLink]="['/printers']">< Back to Printers</a></div>
-<ng-container *ngIf="printer">
   <img class="center-block" id="main-image" [src]=printer.MainPrinterImageUrl/>
   <h1 class="h2 text-center center-block"><strong>{{printer.PrinterName}} - Printer {{printer.UserPrinterId}}</strong></h1>
   <a class="text-center center-block" [routerLink]="['edit']" *ngIf="!editMode">Edit this printer</a>
   <a class="text-center center-block" [routerLink]="['..']" *ngIf="editMode">Stop editing</a>
   <hr/>
   <div class="clearfix"></div>
-  <div class="row">
-    <h2 class="h3">Printer Information</h2>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <dl *ngIf="!editMode">
-        <dt>Name</dt>
-        <dd *ngIf="!editMode">{{printer.PrinterName}}</dd>
-        <dd *ngIf="editMode"><input class="form-control" [(ngModel)]="printer.PrinterName"></dd>
-        <dt>Total Print Time</dt>
-        <dd>{{printer.PrintTimeHours}} hrs</dd>
-        <dt>Number of Prints</dt>
-        <dd>{{printer.NumberOfPrints}}</dd>       
-      </dl>
-      <div class="form-group" *ngIf="editMode">
+  <ng-container *ngIf="!editMode">
+    <div class="row">
+      <h2 class="h3">Printer Information</h2>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <dl *ngIf="!editMode">
+          <dt>Name</dt>
+          <dd>{{printer.PrinterName}}</dd>
+          <dt>Total Print Time</dt>
+          <dd>{{printer.PrintTimeHours}} hrs</dd>
+          <dt>Number of Prints</dt>
+          <dd>{{printer.NumberOfPrints}}</dd>       
+        </dl>
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <dl>
+          <dt>Date Acquired</dt>
+          <dd>{{printer.DateAcquired}}</dd>
+          <dt>Source</dt>
+          <dd>{{printer.PrinterSource}}</dd>
+          <dt>Printer Id</dt>
+          <dd>{{printer.UserPrinterId}}</dd>
+        </dl>
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      <div class="clearfix"></div>
+      <h2 class="h3">Maintenance Information</h2>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <dl>
+          <dt>Belts Maint. Interval</dt>
+          <dd>{{printer.BeltMaintInt}} hrs</dd>
+          <dt>Belts Last Service (Total Print Time)</dt>
+          <dd>{{printer.BeltMaintLast}} hrs</dd>
+        </dl>
+        <form class="form">
+          <button type="button" class="btn btn-default maint-btn">Belt Maintenance Performed</button>
+        </form>
+        
+
+        <dl>
+          <dt>Wiring Maint. Interval</dt>
+          <dd>{{printer.WireMaintInt}} hrs</dd>
+          <dt>Wiring Last Service (Total Print Time)</dt>
+          <dd>{{printer.WireMaintLast}} hrs</dd>
+        </dl>
+        <form class="form">
+          <button type="button" class="btn btn-default maint-btn">Wire Maintenance Performed</button>
+        </form>
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <dl>
+          <dt>Lubr. Maint. Interval</dt>
+          <dd>{{printer.LubeMaintInt}} hrs</dd>
+          <dt>Lubr. Last Service (Total Print Time)</dt>
+          <dd>{{printer.LubeMaintLast}} hrs</dd>
+        </dl>
+        <form class="form">
+          <button type="button" class="btn btn-default maint-btn">Lubr. Maintenance Performed</button>
+        </form>
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+              
+    </div> <!-- row -->
+    <div class="row" *ngIf="printer.Prints.length > 0 && !editMode">
+      <h2 class="h3">Prints From This Printer</h2>
+      <div>
+        <div *ngFor="let print of printer.Prints" class="pull-left">
+          <a [routerLink]="['/prints/printdetails', print.PrintId]" >
+            <div class="print-container text-center">
+              <img [src]=print.MainPrintImageUrl class="print-image center-block"/>
+              <span>{{print.PrintName}}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
+  <form class="form-group" #updateForm="ngForm" *ngIf="editMode" (ngSubmit)="savePrinterEdit()">
+    <fieldset>
+      <h2 class='h3'>Printer Information</h2>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">        
         <label for="printerName">Name</label>
         <input required class="form-control" name="printerName" [(ngModel)]="printer.PrinterName">
-
-      </div>
-    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <dl *ngIf="!editMode">
-        <dt>Date Acquired</dt>
-        <dd>{{printer.DateAcquired}}</dd>
-        <dt>Source</dt>
-        <dd>{{printer.PrinterSource}}</dd>
-        <dt>Printer Id</dt>
-        <dd>{{printer.UserPrinterId}}</dd>
-      </dl>
-      <div class="form-group" *ngIf="editMode">
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">          
         <label for="dateAcquired">Date Acquired</label>
-        <input required class="form-control" [(ngModel)]="printer.DateAcquired">
+        <input required class="form-control" name="dateAcquired" [(ngModel)]="printer.DateAcquired">
         <label for="printerSource">Source</label>
-        <input class="form-control" [(ngModel)]="printer.PrinterSource">
-      </div>
-    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
-    <div class="clearfix"></div>
-    <h2 class="h3">Maintenance Information</h2>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <dl *ngIf="!editMode">
-        <dt>Belts Maint. Interval</dt>
-        <dd>{{printer.BeltMaintInt}} hrs</dd>
-        <dt>Belts Last Service (Total Print Time)</dt>
-        <dd>{{printer.BeltMaintInt}} hrs</dd>
-      </dl>
-      <div class="form-group " *ngIf="editMode">
+        <input class="form-control" name="printerSource" [(ngModel)]="printer.PrinterSource">
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+    </fieldset>
+    <fieldset>
+      <h2 class="h3">Maintenance Information </h2>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  
         <label for="beltMaintInt">Belt Maint. Interval</label>
         <div class="input-group">
-          <input required class="form-control" name="beltMaintInt" [(ngModel)]="printer.BeltMaintInt">
+          <input required class="form-control" ngModel minInt name="beltMaintInt" [(ngModel)]="printer.BeltMaintInt">
           <span class="input-group-addon">Hrs</span>
         </div>
-        
-      </div>
-      <form class="form">
         <button type="button" class="btn btn-default maint-btn">Belt Maintenance Performed</button>
-      </form>
-      
-
-      <dl *ngIf="!editMode">
-        <dt>Wiring Maint. Interval</dt>
-        <dd>{{printer.WireMaintInt}} hrs</dd>
-        <dt>Wiring Last Service (Total Print Time)</dt>
-        <dd>{{printer.WireMaintInt}} hrs</dd>
-      </dl>
-      <div class="form-group" *ngIf="editMode">
+        <br>
         <label for="wireMaintInt">Wiring Maint. Interval</label>
         <div class="input-group">
-          <input required class="form-control" name="wireMaintInt" [(ngModel)]="printer.WireMaintInt">
+          <input required class="form-control" ngModel minInt name="wireMaintInt" [(ngModel)]="printer.WireMaintInt">
           <span class="input-group-addon">Hrs</span>
         </div>
-        
-      </div>
-      <form class="form">
         <button type="button" class="btn btn-default maint-btn">Wire Maintenance Performed</button>
-      </form>
-    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <dl *ngIf="!editMode">
-        <dt>Lubr. Maint. Interval</dt>
-        <dd>{{printer.LubeMaintInt}} hrs</dd>
-        <dt>Lubr. Last Service (Total Print Time)</dt>
-        <dd>{{printer.LubeMaintInt}} hrs</dd>
-      </dl>
-      <div class="form-group" *ngIf="editMode">
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> 
         <label for="lubeMaintInt">Lubr. Maint. Interval</label>
         <div class="input-group">
-          <input required class="form-control" name="lubeMaintInt" [(ngModel)]="printer.LubeMaintInt">
+          <input required class="form-control" ngModel minInt name="lubeMaintInt" [(ngModel)]="printer.LubeMaintInt">
           <span class="input-group-addon">Hrs</span>
         </div>
-        
-      </div>
-      <form class="form">
         <button type="button" class="btn btn-default maint-btn">Lubr. Maintenance Performed</button>
-      </form>
-    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
-            
-  </div> <!-- row -->
-  <div class="row" *ngIf="printer.Prints.length > 0 && !editMode">
-    <h2 class="h3">Prints From This Printer</h2>
-    <div>
-      <div *ngFor="let print of printer.Prints" class="pull-left">
-        <a [routerLink]="['/prints/printdetails', print.PrintId]" >
-          <div class="print-container text-center">
-            <img [src]=print.MainPrintImageUrl class="print-image center-block"/>
-            <span>{{print.PrintName}}</span>
-          </div>
-        </a>
-      </div>
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+    </fieldset>
+    <div class="text-center center-block submit-wrapper">
+      <button class="btn btn-default" type="submit">Save Changes</button>
     </div>
-
-  </div>
-  <div class="center-block text-center" *ngIf="editMode">
-    <div class="form-group">
-      <button class="btn btn-default" (click)="savePrinterEdit()">Save Changes</button>
-    </div>
-  </div>
-  
-</ng-container>
-
+  </form>

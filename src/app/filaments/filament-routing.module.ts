@@ -22,7 +22,10 @@ export const filamentRoutes = [
         children: [
           {
             path: "filamentdetails/:id/edit",
-            redirectTo: "/filaments"
+            component: FilamentDetailsComponent,
+            resolve: {
+              filament: FilamentDetailsResolver
+            }
           },
           {
             path: "filamentdetails/:id",

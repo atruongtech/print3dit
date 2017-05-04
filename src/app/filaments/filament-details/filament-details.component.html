@@ -1,45 +1,83 @@
-
-<div *ngIf="filament">
   <div class='row main-content'>
     <div style="margin-bottom:15px"><a [routerLink]="['/filaments']">< Back to Filaments</a></div>
     <div class="color-header" [style.background]="filament.HtmlColor"></div>
+    <div class="form-inline" id="colorSwatchForm" *ngIf="editMode">
+      <label for="colorSwatch">Color Swatch</label>
+      <input required type="color" name="colorSwatch" [(ngModel)]="filament.HtmlColor">
+    </div>
     <hr/>
-    <div><a [routerLink]="['edit']">Edit this Filament</a></div>
-    <h2 class="h3">Filament Information</h2>
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <dl>
-        <dt>Brand</dt>
-        <dd>{{filament.Brand}}</dd>
-        <dt>Material</dt>
-        <dd>{{filament.Material}}</dd>
-        <dt>Length Remaining</dt>
-        <dd>{{filament.LengthRemain}} m</dd>
-        <dt>Color Family</dt>
-        <dd>{{filament.Color}}</dd>
-      </dl>
-    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-      <dl>
-        <dt>Date of Purchase</dt>
-        <dd>{{filament.DateAcquired}}</dd>
-        <dt>Place of Purchase</dt>
-        <dd>{{filament.FilamentSource}}</dd>
-        <dt>Spool Id</dt>
-        <dd>{{filament.UserFilamentId}} m</dd>
-      </dl>
-    </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
-  </div>
-  <div class="row" *ngIf="filament.Prints">
-    <h2 class="h3">Prints With This Filament</h2>
-    <div>
-      <div *ngFor="let print of filament.Prints" class="pull-left">
-        <a [routerLink]="['/prints/printdetails', print.PrintId]" >
-          <div class="print-container text-center">
-            <img [src]=print.MainPrintImageUrl class="print-image center-block"/>
-            <span>{{print.PrintName}}</span>
-          </div>
-        </a>
+    
+    <div *ngIf="!editMode"><a [routerLink]="['edit']">Edit this Filament</a></div>
+    <div *ngIf="editMode"><a [routerLink]="['..']">Stop Editing</a></div>
+    <ng-container *ngIf="!editMode">
+      <h2 class="h3">Filament Information</h2>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <dl>
+          <dt>Brand</dt>
+          <dd>{{filament.Brand}}</dd>
+          <dt>Material</dt>
+          <dd>{{filament.Material}}</dd>
+          <dt>Length Remaining</dt>
+          <dd>{{filament.LengthRemain}} m</dd>
+          <dt>Color Family</dt>
+          <dd>{{filament.Color}}</dd>
+        </dl>
       </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <dl>
+          <dt>Date of Purchase</dt>
+          <dd>{{filament.DateAcquired}}</dd>
+          <dt>Place of Purchase</dt>
+          <dd>{{filament.FilamentSource}}</dd>
+          <dt>Spool Id</dt>
+          <dd>{{filament.UserFilamentId}}</dd>
+        </dl>
+      </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
+      
+      
+    </ng-container>
+</div> <!-- row -->
+<div class="row" *ngIf="filament.Prints && !editMode">
+  <h2 class="h3">Prints With This Filament</h2>
+  <div>
+    <div *ngFor="let print of filament.Prints" class="pull-left">
+      <a [routerLink]="['/prints/printdetails', print.PrintId]" >
+        <div class="print-container text-center">
+          <img [src]=print.MainPrintImageUrl class="print-image center-block"/>
+          <span>{{print.PrintName}}</span>
+        </div>
+      </a>
     </div>
   </div>
 </div>
+
+<form class="form-group" novalidate *ngIf="editMode" #updateForm="ngForm" (ngSubmit)="saveFilamentEdit()">
+    <fieldset>
+      <h2 class="h3">Filament Information</h2>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label for="brandName">Brand</label>
+        <input required class="form-control" name="brandName" [(ngModel)]="filament.Brand">
+        <label for="materialName">Material</label>
+        <input required class="form-control" name="materialName" [(ngModel)]="filament.Material">
+        <label for="lengthRemain">Length Remaining</label>
+        <div class="input-group">
+          <input required ngModel minInt class="form-control" name="lengthRemain" [(ngModel)]="filament.LengthRemain">
+          <span class="input-group-addon">meters</span>
+        </div>
+        <label for="colorFamily">Color</label>
+        <select class="form-control" name="colorFamily" required [(ngModel)]="selectedColor">
+          <option *ngFor="let color of colors" [ngValue]="color">{{color.Color}}</option>
+        </select>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <label for="dateAcquired">Date of Purchase</label>
+        <input name="dateAcquired" class="form-control" type="date" [(ngModel)]="filament.DateAcquired">
+        <label for="filamentSource">Place of Purchase</label>
+        <input name="filamentSource" class="form-control" [(ngModel)]="filament.FilamentSource">
+      </div>
+    </fieldset>
+    <div class="center-block text-center submit-wrapper">
+      <button type="submit" class="btn btn-default">Save Changes</button>
+    </div>
+    
+  </form>

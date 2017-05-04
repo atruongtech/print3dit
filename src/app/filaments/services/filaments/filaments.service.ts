@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -21,7 +21,7 @@ export class FilamentsService {
       this.environment = environment;
    }
 
-  getFilaments(userId: number): Observable<FilamentDetailView[]> {
+  public getFilaments(userId: number): Observable<FilamentDetailView[]> {
     // make the request
     return this.http.get(this.environment.RES_URI + this.allFilaments + '/' + userId)
               .timeout(60000)
@@ -29,16 +29,29 @@ export class FilamentsService {
               .catch(this.handleError);
   } 
 
-  getFilamentById(Id: number): Observable<FilamentDetailView> {
+  public getFilamentById(Id: number): Observable<FilamentDetailView> {
     return this.http.get(this.environment.RES_URI + this.filamentById + '/' + Id)
               .timeout(60000)
               .map(res => {return this.extractData(res)})
               .catch(this.handleError);
   }
 
-  // getFilamentColors(): Promise<FilamentColor[]> {
-  //   return Promise.resolve(FILAMENTCOLORS);
-  // }
+
+  public getFilamentColors(): Observable<FilamentColor[]> {
+    return this.http.get(this.environment.RES_URI + this.filamentColors)
+              .timeout(60000)
+              .map(res => {return this.extractData(res)})
+              .catch(this.handleError);
+  }
+
+  public updateFilament(filament: FilamentDetailView) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.environment.RES_URI + this.filamentById + "/" + filament.FilamentId, JSON.stringify(filament), options)
+              .timeout(60000)
+              .map(res => {return this.extractData(res)})
+              .catch(this.handleError);
+  }
 
   private extractData(res: Response) {
     let body = res.json();
@@ -82,6 +95,7 @@ export class FilamentDetailView {
   Material: string;
   Brand: string;
   Color: string;
+  ColorId: number;
   Prints: PrintFilamentView[];
   LengthRemain: number;
   DateAcquired: Date;
@@ -95,31 +109,7 @@ export class PrintFilamentView {
   PrintName: string;
 }
 
-const testJson = `{
-  "data": [
-    {
-      "DateAcquired": "2016-02-01",
-      "FilamentSource": "Monoprice",
-      "HtmlColor": "#f47442",
-      "Color": null,
-      "LengthRemain": 50,
-      "UserFilamentId": 1,
-      "Material": "PLA",
-      "UserId": 1,
-      "Brand": "Monoprice",
-      "FilamentId": 1
-    },
-    {
-      "DateAcquired": "2016-02-01",
-      "FilamentSource": "Microcenter",
-      "HtmlColor": "#000000",
-      "Color": null,
-      "LengthRemain": 50,
-      "UserFilamentId": 2,
-      "Material": "PETG",
-      "UserId": 1,
-      "Brand": "Inland",
-      "FilamentId": 2
-    }
-  ]
-}`
+export class FilamentColor {
+  ColorId: number;
+  Color: string;
+}
