@@ -11,18 +11,27 @@ let Auth0Lock = require('auth0-lock').default;
 @Injectable()
 export class Auth {
   // Configure Auth0
+  base_href: string;
   options: any = {
     auth: {
       redirectUrl: window.location.origin + '/login',
       responseType: "token",
     }
   }
-  lock = new Auth0Lock('sDfOrQe1VAPSBGViYgUGJUHXyzSgEgMC', 'print3dstats.auth0.com', this.options);
+  lock: any;
 
   //Store profile object in auth class
   userProfile: any;
 
   constructor(private router: Router) {
+    if (window.location.origin.includes("github")) {
+      this.base_href = "https://atruongtech.github.io/print3dstats";
+    } else {
+      this.base_href = window.location.origin;
+    }
+    this.options.auth.redirectUrl = this.base_href + "/login";
+    this.lock = new Auth0Lock('sDfOrQe1VAPSBGViYgUGJUHXyzSgEgMC', 'print3dstats.auth0.com', this.options)
+
     // Set userProfile attribute of already saved profile
     this.userProfile = JSON.parse(localStorage.getItem('profile'));
 
