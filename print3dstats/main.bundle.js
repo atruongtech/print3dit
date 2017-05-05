@@ -798,13 +798,19 @@ var Auth = (function () {
     function Auth(router) {
         var _this = this;
         this.router = router;
-        // Configure Auth0
         this.options = {
             auth: {
                 redirectUrl: window.location.origin + '/login',
                 responseType: "token",
             }
         };
+        if (window.location.origin.includes("github")) {
+            this.base_href = "https://atruongtech.github.io/print3dstats";
+        }
+        else {
+            this.base_href = window.location.origin;
+        }
+        this.options.auth.redirectUrl = this.base_href + "/login";
         this.lock = new Auth0Lock('sDfOrQe1VAPSBGViYgUGJUHXyzSgEgMC', 'print3dstats.auth0.com', this.options);
         // Set userProfile attribute of already saved profile
         this.userProfile = JSON.parse(localStorage.getItem('profile'));
@@ -2409,7 +2415,7 @@ module.exports = "\n    <form class=\"form form-inline\" id=\"search-form\">\n  
 var environment = {
     production: false,
     envName: 'dev',
-    RES_URI: 'http://10.0.0.10:5000'
+    RES_URI: 'https://10.0.0.10:5000'
 };
 //# sourceMappingURL=environment.js.map
 
