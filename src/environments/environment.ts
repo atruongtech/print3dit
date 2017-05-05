@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   envName: 'dev',
-  RES_URI: 'https://10.0.0.10:5000'
+  RES_URI: 'https://10.0.0.10:5000',
+  REPO_NAME: "print3dstats"
 };

@@ -4,6 +4,8 @@ import { Injectable }      from '@angular/core';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 
+import { environment } from '../../../../environments/environment';
+
 declare var require: any
 // Avoid name not found warnings
 let Auth0Lock = require('auth0-lock').default;
@@ -19,13 +21,15 @@ export class Auth {
     }
   }
   lock: any;
-
+  environment: any;
   //Store profile object in auth class
   userProfile: any;
 
   constructor(private router: Router) {
+    this.environment = environment;
+
     if (window.location.origin.includes("github")) {
-      this.base_href = "https://atruongtech.github.io/print3dstats";
+      this.base_href = window.location.origin + "/" + this.environment.REPO_NAME;
     } else {
       this.base_href = window.location.origin;
     }
