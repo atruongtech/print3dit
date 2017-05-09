@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpModule, JsonpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
 import { AlertModule } from 'ng2-bootstrap';
 
 import { PrintsModule } from './prints/prints.module';
@@ -11,6 +11,7 @@ import { RoutingModule} from './routing/routing.module';
 
 import { Auth } from './common/services/auth0/auth0.service';
 import { AuthguardService } from './common/services/authguard/authguard.service';
+import { CustomHttpService } from './common/services/custom-http/custom-http.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
@@ -33,13 +34,22 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
     PrintersModule,
     FilamentsModule,
     BrowserModule,
-    FormsModule,
     HttpModule,
+    FormsModule,
     JsonpModule,
     RoutingModule,
     AlertModule.forRoot()
   ],
-  providers: [Auth, AuthguardService],
+  providers: [
+    Auth, 
+    AuthguardService,
+    {
+      provide: Http, 
+      useFactory: (backend: XHRBackend, options: RequestOptions) => {
+        return new CustomHttpService(backend, options);
+      },
+      deps: [XHRBackend, RequestOptions] 
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
