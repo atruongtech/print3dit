@@ -1,6 +1,19 @@
 <a [routerLink]="['/prints']">< Back to Prints</a>
 <ng-container *ngIf="print">
-  <img class="center-block" id="main-image" [src]=print.MainPrintImageUrl/>
+
+  <label for="file-upload" class="center-block" *ngIf="editMode">
+    <img class="center-block" id="main-image" [src]=print.MainPrintImageUrl/>
+  </label>
+  <img class="center-block" id="main-image" [src]=print.MainPrintImageUrl *ngIf="!editMode"/>
+
+  <ng-container *ngIf="editMode">
+    <input type="file" id="file-upload" name="file-upload" accept="image/*" (change)="holdImage($event)" style="display:none">
+    <div class="center-block text-center" *ngIf="imageHolder">
+      <strong>Selected File: </strong><span>{{imageHolder.name}}</span>
+      <button class="btn btn-default center-block" (click)="uploadImage()" style="margin-top:5px" >Change Image</button>
+    </div>
+  </ng-container>
+  
   <h1 class="h2 text-center center-block"><strong>{{print.PrintName}}</strong></h1>
   <a [routerLink]="['edit']" *ngIf="!editMode">Edit this Print</a>
   <a [routerLink]="['..']" *ngIf="editMode">Stop Editing</a>

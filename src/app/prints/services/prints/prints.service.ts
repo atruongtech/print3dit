@@ -8,7 +8,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/observable/of';
 
-import { environment } from '../../../../environments/environment'
+import { environment } from '../../../../environments/environment';
 
 @Injectable()
 export class PrintsService {

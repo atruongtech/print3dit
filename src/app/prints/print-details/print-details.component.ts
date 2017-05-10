@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
 import { PrintsService, PrintDetailView, PrinterPrintsView, FilamentPrintsView } from '../services/prints/prints.service';
+import { ImagesService } from '../../common/services/images/images.service';
 
 @Component({
   selector: 'app-print-details',
@@ -24,10 +25,12 @@ export class PrintDetailsComponent implements OnInit {
   selectedFilament: FilamentPrintsView;
 
   editMode: Boolean = false;
+  imageHolder;
 
   constructor(private route: ActivatedRoute
               ,private router: Router
-              ,private printsService: PrintsService) { }
+              ,private printsService: PrintsService
+              ,private imagesService: ImagesService) { }
 
   public savePrintUpdate() {
     // update items not bound directly to the UI
@@ -42,6 +45,37 @@ export class PrintDetailsComponent implements OnInit {
         )
 
     
+  }
+
+  public holdImage(event) {
+    this.imageHolder = event.srcElement.files[0];
+  }
+
+  public uploadImage() {
+    this.imagesService.uploadImage(this.imageHolder)
+        .subscribe(
+          res => {
+            res.subscribe(
+              innerRes => {
+                this.updateImagePath(innerRes);
+                this.imageHolder = null;              
+              }, 
+              error => console.log(error)
+              )
+            }, 
+          error => console.log(error)
+          );
+  }
+
+  private updateImagePath(response) {
+     if (response.status == 200) {
+        this.print.MainPrintImageUrl = response.url;
+        this.imagesService.updateImagePath(this.print.PrintId, response.url)
+            .subscribe(
+              res => console.log(res),
+              error => console.log(error)
+            )
+      }     
   }
 
   // Interface implementations

@@ -12,6 +12,7 @@ import { RoutingModule} from './routing/routing.module';
 import { Auth } from './common/services/auth0/auth0.service';
 import { AuthguardService } from './common/services/authguard/authguard.service';
 import { CustomHttpService } from './common/services/custom-http/custom-http.service';
+import { ImagesService } from './common/services/images/images.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './core/home/home.component';
@@ -43,6 +44,7 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
   providers: [
     Auth, 
     AuthguardService,
+    ImagesService,
     {
       provide: Http, 
       useFactory: (backend: XHRBackend, options: RequestOptions) => {
