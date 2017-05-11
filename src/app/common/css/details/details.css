@@ -2,6 +2,24 @@ dd {
     margin-bottom:10px;
 }
 
+.edit-alert {
+    height:0px;
+    position:absolute;
+    top: 0;
+    left:0;
+    right:0;
+    overflow:hidden;
+    transition: all .5s;
+    background: rgba(0,0,0,0);
+    cursor:pointer;
+    color:white;
+}
+
+.image-container:hover .edit-alert, .edit-alert:hover {
+    height:100%;
+    background:rgba(0,0,0,.5);
+}
+
 
 form .ng-valid.ng-dirty {
     border-left:4px solid lightgreen;
@@ -19,18 +37,25 @@ form .ng-invalid {
     margin-bottom: 10px;
 } 
 
+.image-container {
+    max-height:200px;
+    max-width:400px;
+    border-radius: 5px;
+    margin-top:20px;
+    border: 1px solid lightgrey;
+    display:inline-block;
+}
+
 .input-group {
     max-width:400px;
     margin-bottom:10px;
 }
 
 #main-image{
-    height:200px;
-    width:auto;
-    border: 1px solid lightgrey;
+    max-height:200px;
+    max-width:400px;
     padding: 5px;
-    border-radius: 5px;
-    margin-top:20px;
+    
 }
 
 .maint-btn {

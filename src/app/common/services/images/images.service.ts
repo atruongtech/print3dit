@@ -37,9 +37,10 @@ export class ImagesService {
         .catch(this.handleError);
   }
 
-  public updateImagePath(printId: number, imageUrl: string) {
+  public updateImagePath(printId: number, printerId:number, imageUrl: string) {
     let body = {
       PrintId: printId,
+      PrinterId: printerId,
       ImageUrl: imageUrl
     }
 

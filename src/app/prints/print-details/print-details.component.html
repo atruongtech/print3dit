@@ -1,10 +1,20 @@
 <a [routerLink]="['/prints']">< Back to Prints</a>
 <ng-container *ngIf="print">
+  <div class="row text-center">
+   <label for="file-upload" *ngIf="editMode" >
+      <div class="image-container text-center" style="position:relative" >
+        <img id="main-image" [src]=print.MainPrintImageUrl/>
+        <div class="edit-alert text-left">
+          <span class="glyphicon glyphicon-camera" style="margin:15px 3px 0px 15px;"></span>
+          <span style="font-weight:initial">Change this image</span>
+        </div>
+      </div>
+    </label>
 
-  <label for="file-upload" class="center-block" *ngIf="editMode">
-    <img class="center-block" id="main-image" [src]=print.MainPrintImageUrl/>
-  </label>
-  <img class="center-block" id="main-image" [src]=print.MainPrintImageUrl *ngIf="!editMode"/>
+    <div class="image-container center-block" *ngIf="!editMode">
+      <img id="main-image" [src]=print.MainPrintImageUrl />
+    </div>  
+  </div>
 
   <ng-container *ngIf="editMode">
     <input type="file" id="file-upload" name="file-upload" accept="image/*" (change)="holdImage($event)" style="display:none">

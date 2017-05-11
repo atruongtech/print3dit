@@ -43,8 +43,6 @@ export class PrintDetailsComponent implements OnInit {
           print => this.router.navigate(['/prints','printdetails',print.PrintId]),
           error => this.router.navigate(['/error'])
         )
-
-    
   }
 
   public holdImage(event) {
@@ -70,7 +68,7 @@ export class PrintDetailsComponent implements OnInit {
   private updateImagePath(response) {
      if (response.status == 200) {
         this.print.MainPrintImageUrl = response.url;
-        this.imagesService.updateImagePath(this.print.PrintId, response.url)
+        this.imagesService.updateImagePath(this.print.PrintId, null, response.url)
             .subscribe(
               res => console.log(res),
               error => console.log(error)
