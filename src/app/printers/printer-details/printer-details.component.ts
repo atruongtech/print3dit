@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { PrintersService, PrinterDetailView } from '../services/printers/printers.service';
@@ -19,29 +19,48 @@ export class PrinterDetailsComponent implements OnInit {
   constructor(private printersService: PrintersService
               ,private route: ActivatedRoute
               ,private router: Router
-              ,private imagesService: ImagesService ) { }
+              ,private imagesService: ImagesService
+              ,private element: ElementRef ) { }
 
   public savePrinterEdit() {
-    console.log("button clicked");
-    this.printersService.updatePrinter(this.printer).
-      subscribe(
-        response => this.router.navigate(['/printers','printerdetails', response.PrinterId]),
-        error => this.router.navigate(['/error'])
-      );
+    if (this.imageHolder) {
+      this.uploadImage(innerRes => {
+        this.updateImagePath(innerRes);
+        this.printersService.updatePrinter(this.printer)
+            .subscribe(
+              response => this.router.navigate(['/printers','printerdetails', response.PrinterId]),
+              error => this.router.navigate(['/error'])
+            );
+      })
+    }
+    this.printersService.updatePrinter(this.printer)
+        .subscribe(
+          response => this.router.navigate(['/printers','printerdetails', response.PrinterId]),
+          error => this.router.navigate(['/error'])
+        );
   }
 
   public holdImage(event) {
     this.imageHolder = event.srcElement.files[0];
+    var reader = new FileReader();
+    let element = this.element;
+
+    reader.onload = function (e) {
+        let target:any = e.target;
+        var image = element.nativeElement.querySelector('.image-placeholder');
+        image.src = target.result;
+    }
+
+    reader.readAsDataURL(this.imageHolder);
   }
 
-  public uploadImage() {
+  private uploadImage(callback: (innerRes: any) => any) {
     this.imagesService.uploadImage(this.imageHolder)
         .subscribe(
           res => {
             res.subscribe(
               innerRes => {
-                this.updateImagePath(innerRes);
-                this.imageHolder = null;              
+                callback(innerRes);
               }, 
               error => console.log(error)
               )

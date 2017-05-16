@@ -13,6 +13,7 @@ import { environment } from '../../../../environments/environment';
 @Injectable()
 export class PrintsService {
   private allPrints: string = "/prints";
+  private printCreate: string = "/prints/create";
   private printById: string = "/prints/printdetails";
 
   private printerOptions: string = "/printers";
@@ -49,6 +50,15 @@ export class PrintsService {
     return this.http.get(this.environment.RES_URI + this.printerOptions + '/' + userId)
               .timeout(60000)
               .map(res => {return this.extractPrinterData(res)})
+              .catch(this.handleError);
+  }
+
+  public createPrint(print: PrintDetailView): Observable<PrintDetailView> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.environment.RES_URI + this.printCreate, JSON.stringify(print), options)
+              .timeout(60000)
+              .map(res => {return this.extractData(res)})
               .catch(this.handleError);
   }
 
@@ -150,4 +160,5 @@ export class FilamentPrintsView {
     FilamentName: string;
     FilamentId: number;
     UserFilamentId: number;
+    LengthRemain: number;
 }

@@ -34,6 +34,10 @@ export const printRoutes : Routes = [
             }
           },
           {
+            path:'create',
+            component: PrintDetailsComponent
+          },
+          {
             path: "",
             component: PrintLibraryComponent
           }

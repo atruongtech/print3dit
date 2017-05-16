@@ -66,6 +66,11 @@ form .ng-invalid {
     margin-top:20px;
 }
 
+.upload-alert {
+    max-width:350px;
+    padding:6px;
+}
+
 
 
 

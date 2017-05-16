@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/zip';
 
 import { PrintsService, PrintDetailView, PrinterPrintsView, FilamentPrintsView } from '../services/prints/prints.service';
 import { ImagesService } from '../../common/services/images/images.service';
@@ -25,38 +26,107 @@ export class PrintDetailsComponent implements OnInit {
   selectedFilament: FilamentPrintsView;
 
   editMode: Boolean = false;
+  createMode: Boolean = false;
+  imagePreview;
   imageHolder;
 
   constructor(private route: ActivatedRoute
               ,private router: Router
               ,private printsService: PrintsService
-              ,private imagesService: ImagesService) { }
+              ,private imagesService: ImagesService
+              ,private element: ElementRef) { }
+
+  public formSubmission() {
+    if (this.createMode) {
+      this.createPrint();
+    }
+    else {
+      this.savePrintUpdate();
+    }
+  }
+
+
+  public createPrint() {
+    this.prepPrintForSubmit();
+
+    this.printsService.createPrint(this.print)
+        .subscribe(
+          print => {
+            this.uploadImage(innerRes => {
+              this.updateImagePath(innerRes, print.PrintId)
+                  .subscribe(
+                    res => {
+                      this.router.navigate(['/prints', 'printdetails', print.PrintId]);
+                    },
+                    error => this.router.navigate(['/error'])
+                  );
+            })
+          }
+        )
+  }
 
   public savePrintUpdate() {
-    // update items not bound directly to the UI
-    this.print.FilamentId = this.selectedFilament.FilamentId;
-    this.print.PrinterId = this.selectedPrinter.PrinterId;
-    this.print.PrintTimeMinutes = (this.printTimeHours * 60) + this.printTimeMinutes;
+    this.prepPrintForSubmit();    
 
-    this.printsService.updatePrint(this.print)
+    if (this.imageHolder) {
+      this.uploadImage(innerRes => {
+        Observable.zip(
+          this.updateImagePath(innerRes, this.print.PrintId),
+          this.printsService.updatePrint(this.print)
+        )
+        .subscribe(
+          ([res,print]) => this.router.navigate(['/prints','printdetails',print.PrintId]),
+          error => this.router.navigate(['/error'])
+        )
+      })
+    }
+    else {
+      this.printsService.updatePrint(this.print)
         .subscribe(
           print => this.router.navigate(['/prints','printdetails',print.PrintId]),
           error => this.router.navigate(['/error'])
         )
+    }    
   }
 
   public holdImage(event) {
     this.imageHolder = event.srcElement.files[0];
+    var reader = new FileReader();
+    let element = this.element;
+
+    reader.onload = function (e) {
+        let target:any = e.target;
+        var image = element.nativeElement.querySelector('.image-placeholder');
+        image.src = target.result;
+    }
+
+    reader.readAsDataURL(this.imageHolder);
   }
 
-  public uploadImage() {
+  private prepPrintForSubmit() {
+    this.print.FilamentId = this.selectedFilament.FilamentId;
+    this.print.PrinterId = this.selectedPrinter.PrinterId;
+    this.print.PrintTimeMinutes = (this.printTimeHours * 60) + this.printTimeMinutes;
+
+    // set user ID for creation, and is okay if it's set on edit as well.
+    let profile = localStorage.getItem("profile");
+    let profileObject = JSON.parse(profile);
+    if (profileObject.app_metadata.app_user_id) {
+      this.print.UserId = profileObject.app_metadata.app_user_id;
+    }
+    else {
+      console.error("User ID is not set!");
+      this.router.navigate(["/error"]);
+    }
+  }
+
+  private uploadImage(callback: (innerRes: any) => any) {
     this.imagesService.uploadImage(this.imageHolder)
         .subscribe(
           res => {
             res.subscribe(
               innerRes => {
-                this.updateImagePath(innerRes);
-                this.imageHolder = null;              
+                callback(innerRes);
               }, 
               error => console.log(error)
               )
@@ -65,16 +135,32 @@ export class PrintDetailsComponent implements OnInit {
           );
   }
 
-  private updateImagePath(response) {
+  private updateImagePath(response, printId) {
      if (response.status == 200) {
         this.print.MainPrintImageUrl = response.url;
-        this.imagesService.updateImagePath(this.print.PrintId, null, response.url)
-            .subscribe(
-              res => console.log(res),
-              error => console.log(error)
-            )
-      }     
+        return this.imagesService.updateImagePath(printId, null, response.url)            
+      }
+      return;     
   }
+
+  private loadFilamentAndPrinterOptions() {
+    this.printsService.getFilamentOptions(this.app_user_id)
+        .subscribe(
+          filaments => {
+            this.filamentOptions = filaments;
+            this.selectedFilament = filaments.find(filament => filament.FilamentId == this.print.FilamentId)
+          },
+          error => this.router.navigate(['/error'])
+        );
+    this.printsService.getPrinterOptions(this.app_user_id)
+        .subscribe(
+          printers => {
+            this.printerOptions = printers;
+            this.selectedPrinter = printers.find(printer => printer.PrinterId == this.print.PrinterId)
+          },
+          error => this.router.navigate(['/error'])
+        )
+}
 
   // Interface implementations
   ngOnInit() {
@@ -91,8 +177,10 @@ export class PrintDetailsComponent implements OnInit {
       .subscribe(
         (data: {print: PrintDetailView}) => {
           this.print = data.print;
-          this.printTimeMinutes = this.print.PrintTimeMinutes % 60;
+          if (this.print) {
+            this.printTimeMinutes = this.print.PrintTimeMinutes % 60;
           this.printTimeHours = Math.floor(this.print.PrintTimeMinutes / 60)
+          }
         },
       error => {console.log("error reached final destination"); console.log(error); this.router.navigate(['/error']);});
 
@@ -101,25 +189,17 @@ export class PrintDetailsComponent implements OnInit {
         segments => {
           if (segments.join("").includes("edit")) { 
             this.editMode = true;
-
-            this.printsService.getFilamentOptions(this.app_user_id)
-                .subscribe(
-                  filaments => {
-                    this.filamentOptions = filaments;
-                    this.selectedFilament = filaments.find(filament => filament.FilamentId == this.print.FilamentId)
-                  },
-                  error => this.router.navigate(['/error'])
-                );
-            this.printsService.getPrinterOptions(this.app_user_id)
-                .subscribe(
-                  printers => {
-                    this.printerOptions = printers;
-                    this.selectedPrinter = printers.find(printer => printer.PrinterId == this.print.PrinterId)
-                  },
-                  error => this.router.navigate(['/error'])
-                )
+            this.loadFilamentAndPrinterOptions();            
           }
-        })
+          else if (segments.join("").includes("create")) {
+            this.print = new PrintDetailView();
+            this.print.MainPrintImageUrl = "/assets/images/imageplaceholder.jpg";
+
+            this.editMode = true;
+            this.createMode = true;
+            this.loadFilamentAndPrinterOptions();
+          }
+        });
   }
 
 }

@@ -3,7 +3,8 @@
   <div class="row text-center">
    <label for="file-upload" *ngIf="editMode" >
       <div class="image-container text-center" style="position:relative" >
-        <img id="main-image" [src]=printer.MainPrinterImageUrl/>
+        <img id="main-image" [src]=printer.MainPrinterImageUrl *ngIf="!imageHolder"/>
+        <img id="main-image" class="image-placeholder" [src]=imagePreview *ngIf="imageHolder"/>
         <div class="edit-alert text-left">
           <span class="glyphicon glyphicon-camera" style="margin:15px 3px 0px 15px;"></span>
           <span style="font-weight:initial">Change this image</span>
@@ -18,15 +19,15 @@
 
   <ng-container *ngIf="editMode">
     <input type="file" id="file-upload" name="file-upload" accept="image/*" (change)="holdImage($event)" style="display:none">
-    <div class="center-block text-center" *ngIf="imageHolder">
+    <div class="center-block text-center alert alert-success upload-alert" *ngIf="imageHolder">
       <strong>Selected File: </strong><span>{{imageHolder.name}}</span>
-      <button class="btn btn-default center-block" (click)="uploadImage()" style="margin-top:5px" >Change Image</button>
+      <!--<button class="btn btn-default center-block" (click)="uploadImage()" style="margin-top:5px" >Change Image</button>-->
     </div>
   </ng-container>
   
   <h1 class="h2 text-center center-block"><strong>{{printer.PrinterName}} - Printer {{printer.UserPrinterId}}</strong></h1>
-  <a class="text-center center-block" [routerLink]="['edit']" *ngIf="!editMode">Edit this printer</a>
-  <a class="text-center center-block" [routerLink]="['..']" *ngIf="editMode">Stop editing</a>
+  <a [routerLink]="['edit']" *ngIf="!editMode">Edit this printer</a>
+  <a [routerLink]="['..']" *ngIf="editMode">Stop editing</a>
   <hr/>
   <div class="clearfix"></div>
   <ng-container *ngIf="!editMode">
@@ -144,6 +145,7 @@
       </div> <!-- col-xs-12 col-sm-12 col-md-6 col-lg-6 -->
     </fieldset>
     <div class="text-center center-block submit-wrapper">
-      <button class="btn btn-default" type="submit">Save Changes</button>
+      <button class="btn btn-default" type="submit" [disabled]="!updateForm.valid || updateForm.pristine && !imageHolder">Save Changes</button>
     </div>
+    <div class="alert alert-danger" style="margin-top:20px;" [hidden]="updateForm.valid || updateForm.pristine">One or more fields needs attention!</div>
   </form>
