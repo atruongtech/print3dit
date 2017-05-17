@@ -62,6 +62,16 @@ export class PrintsService {
               .catch(this.handleError);
   }
 
+  public deletePrint(print: PrintDetailView): Observable<number> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    headers.append('UserId', print.UserId.toString() );
+    let options = new RequestOptions({ headers: headers });
+    return this.http.delete(this.environment.RES_URI + this.printById + '/' + print.PrintId)
+              .timeout(60000)
+              .map(res => {return this.extractData(res)})
+              .catch(this.handleError);
+  }
+
   public updatePrint(print: PrintDetailView): Observable<PrintDetailView> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

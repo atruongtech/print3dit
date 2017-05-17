@@ -71,9 +71,9 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <label for="dateAcquired">Date of Purchase</label>
-        <input name="dateAcquired" class="form-control" type="date" [(ngModel)]="filament.DateAcquired">
+        <input required name="dateAcquired" class="form-control" type="date" [(ngModel)]="filament.DateAcquired">
         <label for="filamentSource">Place of Purchase</label>
-        <input name="filamentSource" class="form-control" [(ngModel)]="filament.FilamentSource">
+        <input required name="filamentSource" class="form-control" [(ngModel)]="filament.FilamentSource">
       </div>
     </fieldset>
     <div class="center-block text-center submit-wrapper">

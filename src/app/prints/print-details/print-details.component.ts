@@ -25,6 +25,8 @@ export class PrintDetailsComponent implements OnInit {
   filamentOptions: FilamentPrintsView[];
   selectedFilament: FilamentPrintsView;
 
+  showDelete: Boolean = false;
+
   editMode: Boolean = false;
   createMode: Boolean = false;
   imagePreview;
@@ -89,6 +91,20 @@ export class PrintDetailsComponent implements OnInit {
     }    
   }
 
+  public deletePrint() {
+    this.printsService.deletePrint(this.print)
+        .subscribe(
+          nDeletes => {
+            console.log("Deleted " + nDeletes + " prints.");
+            this.router.navigate(['/prints']);
+          },
+          error => {
+            console.error(error);
+            this.router.navigate(['/error']);
+          }
+        )
+  }
+
   public holdImage(event) {
     this.imageHolder = event.srcElement.files[0];
     var reader = new FileReader();
@@ -108,16 +124,8 @@ export class PrintDetailsComponent implements OnInit {
     this.print.PrinterId = this.selectedPrinter.PrinterId;
     this.print.PrintTimeMinutes = (this.printTimeHours * 60) + this.printTimeMinutes;
 
-    // set user ID for creation, and is okay if it's set on edit as well.
-    let profile = localStorage.getItem("profile");
-    let profileObject = JSON.parse(profile);
-    if (profileObject.app_metadata.app_user_id) {
-      this.print.UserId = profileObject.app_metadata.app_user_id;
-    }
-    else {
-      console.error("User ID is not set!");
-      this.router.navigate(["/error"]);
-    }
+    // set user ID for creation, and is okay if it's set on edit as well.    
+    this.print.UserId = this.app_user_id;    
   }
 
   private uploadImage(callback: (innerRes: any) => any) {

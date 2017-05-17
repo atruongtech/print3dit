@@ -22,6 +22,8 @@ export class PrintLibraryComponent implements OnInit {
   selectedFilament: any;
   selectedPrinter: any;
 
+  loading: Boolean = true;
+
   constructor(private printsService: PrintsService, private router: Router) { 
     
   }
@@ -51,8 +53,7 @@ export class PrintLibraryComponent implements OnInit {
     }
     else {
 
-    }
-    
+    }    
 
     this.printsService.getFilamentOptions(this.app_user_id)
       .subscribe(
@@ -68,6 +69,7 @@ export class PrintLibraryComponent implements OnInit {
         prints => {
           this.allPrints = prints; 
           this.displayPrints = prints;
+          this.loading = false;
         },
         error => {
           console.error(error);
