@@ -16,6 +16,7 @@ export class FilamentLibraryComponent implements OnInit {
   displayFilaments: FilamentDetailView[];
 
   is_error: Boolean = false;
+  loading: Boolean = true;
 
   constructor(private filamentsService: FilamentsService) { }
 
@@ -30,7 +31,7 @@ export class FilamentLibraryComponent implements OnInit {
 
     this.filamentsService.getFilaments(this.app_user_id)
         .subscribe(
-          filaments => { this.allFilaments = filaments; this.displayFilaments = filaments },
+          filaments => { this.allFilaments = filaments; this.displayFilaments = filaments; this.loading=false; },
           error => { console.error(error); this.is_error = true; }
         )
       // .then(filaments => this.allFilaments = filaments)

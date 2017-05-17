@@ -1,14 +1,14 @@
   <div class='row main-content'>
-    <div style="margin-bottom:15px"><a [routerLink]="['/filaments']">< Back to Filaments</a></div>
+    <div style="margin-bottom:15px"><a [routerLink]="['/filaments']"><span class="glyphicon glyphicon-triangle-left"></span> Back to Filaments</a></div>
     <div class="color-header" [style.background]="filament.HtmlColor"></div>
-    <div class="form-inline" id="colorSwatchForm" *ngIf="editMode">
+    <form class="form-inline" id="colorSwatchForm" *ngIf="editMode">
       <label for="colorSwatch">Color Swatch</label>
       <input required type="color" name="colorSwatch" [(ngModel)]="filament.HtmlColor">
-    </div>
+    </form>
     <hr/>
     
-    <div *ngIf="!editMode"><a [routerLink]="['edit']">Edit this Filament</a></div>
-    <div *ngIf="editMode"><a [routerLink]="['..']">Stop Editing</a></div>
+    <div *ngIf="!editMode && filament.UserId == app_user_id"><a [routerLink]="['edit']"><span class="glyphicon glyphicon-edit"></span> Edit Filament</a></div>
+    <div *ngIf="editMode && !createMode"><a [routerLink]="['..']"><span class="glyphicon glyphicon-ban-circle"></span> Stop Editing</a></div>
     <ng-container *ngIf="!editMode">
       <h2 class="h3">Filament Information</h2>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -37,7 +37,7 @@
       
     </ng-container>
 </div> <!-- row -->
-<div class="row" *ngIf="filament.Prints && !editMode">
+<div class="row" *ngIf="filament.Prints.length > 0 && !editMode">
   <h2 class="h3">Prints With This Filament</h2>
   <div>
     <div *ngFor="let print of filament.Prints" class="pull-left">
@@ -51,7 +51,7 @@
   </div>
 </div>
 
-<form class="form-group" novalidate *ngIf="editMode" #updateForm="ngForm" (ngSubmit)="saveFilamentEdit()">
+<form class="form-group" novalidate *ngIf="editMode" #updateForm="ngForm" (ngSubmit)="formSubmission()">
     <fieldset>
       <h2 class="h3">Filament Information</h2>
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -77,7 +77,8 @@
       </div>
     </fieldset>
     <div class="center-block text-center submit-wrapper">
-      <button type="submit" class="btn btn-default">Save Changes</button>
+      <button type="submit" class="btn btn-default" [disabled]="!updateForm.valid || (updateForm.pristine && initialHtmlColor == filament.HtmlColor)" *ngIf="!createMode">Save Changes</button>
+      <button type="submit" class="btn btn-default" [disabled]="!updateForm.valid || updateForm.pristine" *ngIf="createMode">Create Filament</button>
     </div>
-    
+    <div class="alert alert-danger" style="margin-top:20px;" [hidden]="updateForm.valid">One or more fields needs attention!</div>
   </form>

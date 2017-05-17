@@ -13,6 +13,7 @@ import { environment } from '../../../../environments/environment'
 @Injectable()
 export class PrintersService {
   private allPrinters = '/printers';
+  private printerCreate = '/printers/create';
   private printerById = '/printers/printerdetails';
 
   private environment: any;
@@ -39,6 +40,15 @@ export class PrintersService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(this.environment.RES_URI + this.printerById + '/' + printer.PrinterId, JSON.stringify(printer), options)
+              .timeout(60000)
+              .map(res => this.extractData(res))
+              .catch(this.handleError);
+  }
+
+  public createPrinter(printer: PrinterDetailView): Observable<PrinterDetailView> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.environment.RES_URI + this.printerCreate, JSON.stringify(printer), options)
               .timeout(60000)
               .map(res => this.extractData(res))
               .catch(this.handleError);

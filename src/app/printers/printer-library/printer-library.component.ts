@@ -16,6 +16,8 @@ export class PrinterLibraryComponent implements OnInit {
   displayPrinters: PrinterLibraryView[];
   printerSearchTxt: string;
 
+  loading: Boolean = true;
+
   constructor(private router: Router,
               private printersService: PrintersService) { }
 
@@ -39,6 +41,7 @@ export class PrinterLibraryComponent implements OnInit {
         printers => {
           this.allPrinters = printers;
           this.displayPrinters = printers;
+          this.loading = false;
         },
         error => {
           console.error(error);

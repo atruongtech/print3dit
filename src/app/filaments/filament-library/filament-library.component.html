@@ -12,29 +12,34 @@
   </div> <!-- form-group col-md-2 -->
 
 </form> <!-- form -->
-  <div class="clearfix"></div>
-  <hr/>
+<div class="clearfix"></div>
+<hr/>
+<div class="center-block text-center" *ngIf="loading">
+  <img src="/assets/images/loader1.gif">
+</div>
+<ng-container *ngIf="!loading">
+  <div style="margin-bottom:15px"><a [routerLink]="['create']"><span class="glyphicon glyphicon-plus"></span> New Filament</a></div>
+  <table class="table table-hover table-responsive">
+    <thead>
 
-<table class="table table-hover table-responsive">
-  <thead>
-
-    <th>Spool</th>
-    <th>Material</th>
-    <th>Brand</th>
-    <th>Color Family</th>
-    <th>Color Swatch</th>
-  </thead>
-  <tbody>
-    <ng-container *ngFor="let filament of displayFilaments">
-      <tr>
-        <td><a [routerLink]="['filamentdetails',filament.FilamentId]" class="rowlink">{{filament.UserFilamentId}}</a></td>
-        <td>{{filament.Material}}</td>
-        <td>{{filament.Brand}}</td>
-        <td>{{filament.Color}}</td>
-        <td><div class="color-sample" [style.background]="filament.HtmlColor"></div></td>
-      </tr>
-    </ng-container>
-  </tbody>
-</table>
+      <th>Spool</th>
+      <th>Material</th>
+      <th>Brand</th>
+      <th>Color Family</th>
+      <th>Color Swatch</th>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let filament of displayFilaments">
+        <tr>
+          <td><a [routerLink]="['filamentdetails',filament.FilamentId]" class="rowlink">{{filament.UserFilamentId}}</a></td>
+          <td>{{filament.Material}}</td>
+          <td>{{filament.Brand}}</td>
+          <td>{{filament.Color}}</td>
+          <td><div class="color-sample" [style.background]="filament.HtmlColor" style="border:1px solid lightgrey"></div></td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</ng-container>
 
 <div *ngIf="is_error" class="text-center">Sorry, something went wrong.</div>

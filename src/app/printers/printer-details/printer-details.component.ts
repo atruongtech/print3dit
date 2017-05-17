@@ -10,7 +10,10 @@ import { ImagesService } from '../../common/services/images/images.service';
   styleUrls: ['../../common/css/details/details.css', './printer-details.component.css']
 })
 export class PrinterDetailsComponent implements OnInit {
-  private editMode: boolean = false;
+  app_user_id: number;
+
+  editMode: boolean = false;
+  createMode: Boolean = false;
   printer: PrinterDetailView;
 
   private imageHolder;
@@ -22,10 +25,19 @@ export class PrinterDetailsComponent implements OnInit {
               ,private imagesService: ImagesService
               ,private element: ElementRef ) { }
 
+  public formSubmission() {
+    if (this.createMode) {
+      this.createPrinter();
+    }
+    else {
+      this.savePrinterEdit();
+    }
+  }
+
   public savePrinterEdit() {
     if (this.imageHolder) {
       this.uploadImage(innerRes => {
-        this.updateImagePath(innerRes);
+        this.updateImagePath(innerRes, this.printer.PrinterId);
         this.printersService.updatePrinter(this.printer)
             .subscribe(
               response => this.router.navigate(['/printers','printerdetails', response.PrinterId]),
@@ -38,6 +50,24 @@ export class PrinterDetailsComponent implements OnInit {
           response => this.router.navigate(['/printers','printerdetails', response.PrinterId]),
           error => this.router.navigate(['/error'])
         );
+  }
+
+  public createPrinter() {
+    this.printer.UserId = this.app_user_id;
+    this.printersService.createPrinter(this.printer)
+        .subscribe(
+          printer => {
+            this.uploadImage(innerRes => {
+              this.updateImagePath(innerRes, printer.PrinterId)
+                  .subscribe(
+                    res => {
+                      this.router.navigate(['/printers', 'printerdetails', printer.PrinterId]);
+                    },
+                    error => this.router.navigate(['/error'])
+                  );
+            })
+          }
+        )
   }
 
   public holdImage(event) {
@@ -69,18 +99,27 @@ export class PrinterDetailsComponent implements OnInit {
           );
   }
 
-  private updateImagePath(response) {
+  private updateImagePath(response, printerId) {
      if (response.status == 200) {
         this.printer.MainPrinterImageUrl = response.url;
-        this.imagesService.updateImagePath(null, this.printer.PrinterId, response.url)
-            .subscribe(
-              res => console.log(res),
-              error => console.log(error)
-            )
-      }     
+        return this.imagesService.updateImagePath(null, printerId, response.url)
+      } 
+     else {
+       this.router.navigate(['/error']);
+       return;
+     }
   }
 
   ngOnInit() {
+    if (localStorage.getItem("profile") != null ) {
+      let userProfile: any = localStorage.getItem("profile");
+      this.app_user_id = JSON.parse(userProfile).app_metadata.app_user_id;
+    }
+    else {
+      console.error("Application user ID not set.");
+      this.router.navigate(['/error']);
+    }
+
     this.route.data
       .subscribe(
         (data: {printer: PrinterDetailView}) => {
@@ -93,7 +132,21 @@ export class PrinterDetailsComponent implements OnInit {
       });
 
     this.route.url
-      .subscribe(segments => {if (segments.join("").includes("edit")) { this.editMode = true }})
+      .subscribe(
+        segments => {
+          if (segments.join("").includes("edit")) { 
+            this.editMode = true; 
+          }
+          else if (segments.join("").includes("create")) {
+            this.printer = new PrinterDetailView();
+            this.printer.MainPrinterImageUrl = "/assets/images/imageplaceholder.jpg";
+
+            this.editMode = true;
+            this.createMode = true;
+          }
+        },
+        error => this.router.navigate(['/error'])
+      );
 
 
   }

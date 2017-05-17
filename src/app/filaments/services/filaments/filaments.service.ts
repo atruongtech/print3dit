@@ -15,6 +15,7 @@ export class FilamentsService {
   environment: any;
   private allFilaments = '/filaments';
   private filamentById = '/filaments/filamentdetails';
+  private filamentCreate = '/filaments/create';
   private filamentColors = '/filaments/colors';
 
   constructor(private http: Http) {
@@ -48,6 +49,15 @@ export class FilamentsService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(this.environment.RES_URI + this.filamentById + "/" + filament.FilamentId, JSON.stringify(filament), options)
+              .timeout(60000)
+              .map(res => {return this.extractData(res)})
+              .catch(this.handleError);
+  }
+
+  public createFilament(filament: FilamentDetailView) {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.environment.RES_URI + this.filamentCreate, JSON.stringify(filament), options)
               .timeout(60000)
               .map(res => {return this.extractData(res)})
               .catch(this.handleError);

@@ -16,22 +16,27 @@
     </form> <!-- form -->
   <div class="clearfix"></div>
   <hr/>
-
-  <div id="library-display" class="gutter-20">
-    <div *ngFor="let printer of displayPrinters" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 single-display">
-      <a [routerLink]="['printerdetails',printer.PrinterId]">
-        <div class="display-container">
-          <div class="display-image-container center-block">
-            <img [src]=printer.MainPrinterImageUrl class="center-block display-image"/>
-          </div>
-          <div class="display-info">
-            <p class="text-center"><strong>{{printer.PrinterName}}</strong></p>
-            <p class="text-center" style="margin-bottom:5px"><strong>Printer {{printer.PrinterId}}</strong></p>
-            <p class="text-center"><em>Prints:</em> {{printer.NumberOfPrints}}</p>
-            <p class="text-center"><em>Print Time:</em> {{printer.PrintTimeHours}} hours</p>
-            <p class="text-center"><em>Since: </em> {{printer.DateAcquired}}</p>
-          </div> <!-- print-display-info -->
-        </div> <!-- print-display-container -->
-      </a>
-    </div> <!-- let print of allPrints -->
+  <div class="center-block text-center" *ngIf="loading">
+    <img src="/assets/images/loader1.gif">
   </div>
+  <ng-container *ngIf="!loading">
+    <div style="margin-bottom:10px; margin-left:15px;"><a [routerLink]="['create']"><span class="glyphicon glyphicon-plus"></span> New Printer</a></div>
+    <div id="library-display" class="gutter-20">
+      <div *ngFor="let printer of displayPrinters" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 single-display">
+        <a [routerLink]="['printerdetails',printer.PrinterId]">
+          <div class="display-container">
+            <div class="display-image-container center-block">
+              <img [src]=printer.MainPrinterImageUrl class="center-block display-image"/>
+            </div>
+            <div class="display-info">
+              <p class="text-center"><strong>{{printer.PrinterName}}</strong></p>
+              <p class="text-center" style="margin-bottom:5px"><strong>Printer {{printer.UserPrinterId}}</strong></p>
+              <p class="text-center"><em>Prints:</em> {{printer.NumberOfPrints || 0}}</p>
+              <p class="text-center"><em>Print Time:</em> {{printer.PrintTimeHours || 0}} hours</p>
+              <p class="text-center"><em>Since: </em> {{printer.DateAcquired}}</p>
+            </div> <!-- print-display-info -->
+          </div> <!-- print-display-container -->
+        </a>
+      </div> <!-- let print of allPrints -->
+  </div>
+  </ng-container>

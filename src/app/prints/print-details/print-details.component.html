@@ -1,5 +1,5 @@
 <a [routerLink]="['/prints']" class="pull-left"><span class="glyphicon glyphicon-triangle-left"></span> Back to Prints</a>
-<a (click)="showDelete=true" class="pull-right" style="cursor:pointer"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+<a *ngIf="print.UserId == app_user_id" (click)="showDelete=true" class="pull-right" style="cursor:pointer"><span class="glyphicon glyphicon-trash"></span> Delete</a>
 <div class="clearfix"></div>
 <div *ngIf="showDelete" class="alert alert-danger text-center" style="margin-top:10px; margin-bottom:-5px;">
   <span>Deletion is permanent. Delete this print? </span>
@@ -37,8 +37,8 @@
   
 <h1 class="h2 text-center center-block"><strong>{{print.PrintName}}</strong></h1>
 <h1 class="h2 text-center center-block" style="color:lightgrey" *ngIf="!print.PrintName"><strong>Enter a print name below</strong></h1>
-<a [routerLink]="['edit']" *ngIf="!editMode"><span class="glyphicon glyphicon-edit" style="margin-right:3px"></span>Edit</a>
-<a [routerLink]="['..']" *ngIf="editMode"><span class="glyphicon glyphicon-ban-circle"></span> Stop Editing</a>
+<a [routerLink]="['edit']" *ngIf="!editMode && print.UserId == app_user_id"><span class="glyphicon glyphicon-edit" style="margin-right:3px"></span>Edit</a>
+<a [routerLink]="['..']" *ngIf="editMode && !createMode"><span class="glyphicon glyphicon-ban-circle"></span> Stop Editing</a>
 <hr/>
 
 <div class="clearfix"></div>

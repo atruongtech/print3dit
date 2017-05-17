@@ -148,7 +148,10 @@ export class PrintDetailsComponent implements OnInit {
         this.print.MainPrintImageUrl = response.url;
         return this.imagesService.updateImagePath(printId, null, response.url)            
       }
-      return;     
+      else {
+        this.router.navigate(['/error']);
+        return;    
+      }       
   }
 
   private loadFilamentAndPrinterOptions() {
@@ -187,7 +190,7 @@ export class PrintDetailsComponent implements OnInit {
           this.print = data.print;
           if (this.print) {
             this.printTimeMinutes = this.print.PrintTimeMinutes % 60;
-          this.printTimeHours = Math.floor(this.print.PrintTimeMinutes / 60)
+            this.printTimeHours = Math.floor(this.print.PrintTimeMinutes / 60);
           }
         },
       error => {console.log("error reached final destination"); console.log(error); this.router.navigate(['/error']);});
@@ -195,7 +198,11 @@ export class PrintDetailsComponent implements OnInit {
     this.route.url
       .subscribe(
         segments => {
-          if (segments.join("").includes("edit")) { 
+          if (segments.join("").includes("edit")) {
+            if (this.app_user_id != this.print.UserId) {
+              this.router.navigate(['/404']);
+              return;
+            } 
             this.editMode = true;
             this.loadFilamentAndPrinterOptions();            
           }

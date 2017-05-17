@@ -32,6 +32,10 @@ const printerRoutes: Routes = [
               printer: PrinterDetailsResolver
             }
           },
+          {
+            path:"create",
+            component: PrinterDetailsComponent
+          },
           
           { path:"", component: PrinterLibraryComponent }
         ]
