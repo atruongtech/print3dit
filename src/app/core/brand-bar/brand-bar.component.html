@@ -10,13 +10,27 @@
       <a class="navbar-brand" href="#">Print3dStats</a> 
       
     </div>
-    <div class="navbar-collapse collapse" id="testing">
-
-        <form class="navbar-form navbar-right">
-          <button type="button" class="btn btn-success" *ngIf="!auth.authenticated()" (click)="login()">Sign In</button>
-          <button type="button" class="btn btn-default" *ngIf="auth.authenticated()" (click)="logout()">Sign Out</button>
-        </form>
-    </div>
+    <ul class="nav navbar-nav navbar-collapse collapse navbar-right" id="testing">
+      <ng-container *ngIf="auth.authenticated()">
+      <li class="visible-sm visible-xs" *ngIf="auth.userProfile">
+        <p class="navbar-text">{{auth.userProfile.name}}</p>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/prints']" >Prints</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/printers']" >Printers</a>
+      </li>
+      <li routerLinkActive="active">
+        <a [routerLink]="['/filaments']" >Filaments</a>
+      </li>
+      </ng-container>
+      <li>
+        <button type="button" class="btn btn-success navbar-btn" *ngIf="!auth.authenticated()" (click)="login()" style="margin-left:10px;">Sign In</button>
+        <button type="button" class="btn btn-default navbar-btn" *ngIf="auth.authenticated()" (click)="logout()" style="margin-left:10px;">Sign Out</button>
+      </li>
+          
+    </ul>
     
   </div><!-- /.container-->
   

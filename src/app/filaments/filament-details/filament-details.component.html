@@ -37,7 +37,7 @@
       
     </ng-container>
 </div> <!-- row -->
-<div class="row" *ngIf="filament.Prints.length > 0 && !editMode">
+<div class="row" *ngIf="filament.Prints && filament.Prints.length > 0 && !editMode">
   <h2 class="h3">Prints With This Filament</h2>
   <div>
     <div *ngFor="let print of filament.Prints" class="pull-left">

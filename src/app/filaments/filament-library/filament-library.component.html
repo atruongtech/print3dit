@@ -1,20 +1,20 @@
 <form class="form form-inline" id="search-form">
-  <div class="form-group col-md-6">
+  <div class="form-group col-xs-8 col-sm-8 col-md-8 col-lg-6">
     <label class="control-label" for="searchTxt">Search</label>
     <div class="">
       <input type="text" class="form-control" name="searchTxt" [(ngModel)]="searchTxt" placeholder="Search by color, brand, or material">
     </div>
-  </div> <!-- form-group col-md-6 -->
-    <div class="form-group col-md-2">
+  </div> <!-- form-group col-xs-8 col-sm-8 col-md-8 col-lg-6 -->
+    <div class="form-group col-xs-4 col-sm-4 col-md-4 col-lg-4">
     <div>
       <button class="btn btn-default" (click)="applySearch()">Apply</button>
     </div>
-  </div> <!-- form-group col-md-2 -->
+  </div> <!-- form-group col-xs-4 col-sm-4 col-md-4 col-lg-4 -->
 
 </form> <!-- form -->
 <div class="clearfix"></div>
 <hr/>
-<div class="center-block text-center" *ngIf="loading">
+<div class="center-block text-center" *ngIf="loading && !is_error">
   <img src="/assets/images/loader1.gif">
 </div>
 <ng-container *ngIf="!loading">

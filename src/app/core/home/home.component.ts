@@ -4,7 +4,8 @@ import { Auth } from '../../common/services/auth0/auth0.service';
 import { environment } from '../../../environments/environment';
 
 @Component({
-    template : "<div *ngIf='auth.authenticated() && auth.userProfile'>Welcome to Print3dStats, {{auth.userProfile.name}} </div> <div>{{environment.envName}}</div>"
+    templateUrl:'./home.component.html',
+    styleUrls:['./home.component.css']
 })
 export class HomeComponent implements OnInit {
     name: string;

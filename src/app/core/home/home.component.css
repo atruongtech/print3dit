@@ -1,0 +1,29 @@
+a {
+    color:inherit;
+}
+
+.jumbotron {
+    background:url('/assets/images/jumbotron.jpg') no-repeat center center;
+}
+
+.main-link {
+    background-size:cover !important; 
+    width:160px; 
+    height:160px;
+    position:relative;
+}
+
+.main-link-container {
+    margin-bottom:50px;
+}
+
+.main-link:before {
+    content: "";
+    position:absolute;
+    top:-7.5px;
+    right:-7.5px;
+    border-radius:50%;
+    width:175px;
+    height:175px;
+    border: 1px solid lightgrey; 
+}
