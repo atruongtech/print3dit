@@ -1,10 +1,17 @@
 // app/auth.service.ts
 
 import { Injectable }      from '@angular/core';
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
 import { tokenNotExpired } from 'angular2-jwt';
 import { Router } from '@angular/router';
 
 import { environment } from '../../../../environments/environment';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw';
+import 'rxjs/add/operator/timeout';
+import 'rxjs/add/observable/of';
 
 declare var require: any
 // Avoid name not found warnings
@@ -25,7 +32,10 @@ export class Auth {
   //Store profile object in auth class
   userProfile: any;
 
-  constructor(private router: Router) {
+  private userCreateEndpoint: string = "/users/create";
+
+  constructor(private router: Router
+              ,private http: Http) {
     this.environment = environment;
 
     if (window.location.origin.includes("github")) {
@@ -80,5 +90,35 @@ export class Auth {
         localStorage.setItem('profile', JSON.stringify(profile));
         this.userProfile = profile;
       });
+  }
+
+  public setAppUserId(auth0UserId: string): Observable<any> {
+    let headers = new Headers({"content-type": "application/json"});
+    let options = new RequestOptions({headers: headers});
+    let body = {"auth0UserId": auth0UserId};
+
+    return this.http.post(environment.RES_URI + this.userCreateEndpoint, JSON.stringify(body), options)
+                    .timeout(60000)
+                    .map(res => {return this.extractData(res)})
+                    .catch(this.handleError);
+  }
+
+  private extractData(res: Response) {
+    let body = res.json();
+    return body.data || { };
+  }
+
+  private handleError (error: Response | any) {
+    let errMsg: string;
+    if (error instanceof Response) {
+      const body = error.json() || '';
+      const err = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    console.error(errMsg);
+    console.log("There was an error!");
+    return Observable.throw(errMsg);
   }
 }
