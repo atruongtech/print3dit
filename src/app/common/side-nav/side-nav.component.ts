@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Auth } from '../services/auth0/auth0.service';
 
 @Component({
@@ -9,7 +9,6 @@ import { Auth } from '../services/auth0/auth0.service';
 export class SideNavComponent implements OnInit {
 
   constructor(public auth: Auth) { }
-
   ngOnInit() {
   }
 

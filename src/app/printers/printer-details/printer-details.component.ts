@@ -3,6 +3,9 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { PrintersService, PrinterDetailView } from '../services/printers/printers.service';
 import { ImagesService } from '../../common/services/images/images.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/zip';
 
 @Component({
   selector: 'app-printer-details',
@@ -33,16 +36,18 @@ export class PrinterDetailsComponent implements OnInit {
       this.savePrinterEdit();
     }
   }
-
+ 
   public savePrinterEdit() {
     if (this.imageHolder) {
       this.uploadImage(innerRes => {
-        this.updateImagePath(innerRes, this.printer.PrinterId);
-        this.printersService.updatePrinter(this.printer)
-            .subscribe(
-              response => this.router.navigate(['/printers','printerdetails', response.PrinterId]),
-              error => this.router.navigate(['/error'])
-            );
+        Observable.zip(
+          this.updateImagePath(innerRes, this.printer.PrinterId),
+          this.printersService.updatePrinter(this.printer)
+        )
+        .subscribe(
+          ([response, printer])=> this.router.navigate(['/printers','printerdetails', printer.PrinterId]),
+          error => this.router.navigate(['/error'])
+        );
       })
     }
     this.printersService.updatePrinter(this.printer)

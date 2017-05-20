@@ -20,6 +20,7 @@ import { BrandBarComponent } from './core/brand-bar/brand-bar.component';
 import { AppCommonModule } from './common/app-common.module';
 import { ErrorComponent } from './core/error/error.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
+import { IntroductionComponent } from './core/introduction/introduction.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
     BrandBarComponent,
     ErrorComponent,
     NotFoundComponent,
+    IntroductionComponent,
   ],
   imports: [
     AppCommonModule,

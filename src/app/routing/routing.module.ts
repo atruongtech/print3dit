@@ -5,12 +5,14 @@ import { HomeComponent} from '../core//home/home.component';
 import { LoginComponent } from '../common/login/login.component';
 import { ErrorComponent } from '../core/error/error.component';
 import { NotFoundComponent } from '../core/not-found/not-found.component';
+import { IntroductionComponent } from '../core/introduction/introduction.component';
 
 const appRoutes : Routes = [
     
     {path: 'login', component: LoginComponent },
     {path: 'error', component: ErrorComponent},
     {path: '404', component: NotFoundComponent},
+    {path: 'intro', component: IntroductionComponent},
     {path: '', component: HomeComponent},
     {path: '**', component: NotFoundComponent}
 ]

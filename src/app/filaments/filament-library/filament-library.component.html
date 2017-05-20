@@ -40,6 +40,10 @@
       </ng-container>
     </tbody>
   </table>
+  <div class="text-center">
+    <h3 class="attention" *ngIf="!displayFilaments || displayFilaments.length == 0">Seems like there is nothing here.</h3>
+  </div>
+
 </ng-container>
 
 <div *ngIf="is_error" class="text-center">Sorry, something went wrong.</div>

@@ -21,6 +21,11 @@
   </div>
   <ng-container *ngIf="!loading">
     <div style="margin-bottom:10px; margin-left:15px;"><a [routerLink]="['create']"><span class="glyphicon glyphicon-plus"></span> New Printer</a></div>
+
+    <div class="text-center">
+      <h3 class="attention" *ngIf="!displayPrinters || displayPrinters.length == 0">Seems like there is nothing here.</h3>
+    </div>
+
     <div id="library-display" class="gutter-20">
       <div *ngFor="let printer of displayPrinters" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 single-display">
         <a [routerLink]="['printerdetails',printer.PrinterId]">

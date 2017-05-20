@@ -22,6 +22,9 @@ export class PrintLibraryComponent implements OnInit {
   selectedFilament: any;
   selectedPrinter: any;
 
+  noPrinters: Boolean = false;
+  noFilaments: Boolean = false;
+
   loading: Boolean = true;
 
   constructor(private printsService: PrintsService, private router: Router) { 
@@ -58,7 +61,10 @@ export class PrintLibraryComponent implements OnInit {
     this.printsService.getFilamentOptions(this.app_user_id)
       .subscribe(
         filaments => { 
-          this.filamentOptions = filaments
+          this.filamentOptions = filaments;
+          if (filaments.length == 0) {
+            this.noFilaments = true;
+          }
         }
         ,error => {
           console.error(error);
@@ -77,7 +83,12 @@ export class PrintLibraryComponent implements OnInit {
         })
     this.printsService.getPrinterOptions(this.app_user_id)
       .subscribe(
-        printers => this.printerOptions = printers,
+        printers => {
+          this.printerOptions = printers;
+          if (printers.length == 0) {
+            this.noPrinters = true;
+          }
+        },
         error => {
           console.error(error);
           this.router.navigate(['/error']);
