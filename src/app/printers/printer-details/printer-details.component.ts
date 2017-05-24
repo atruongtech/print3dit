@@ -89,6 +89,21 @@ export class PrinterDetailsComponent implements OnInit {
     reader.readAsDataURL(this.imageHolder);
   }
 
+  public updateMaintenance(maintType: string) {
+    this.printersService.updateMaintenance(maintType, this.printer.PrinterId)
+        .subscribe(
+          res => {
+            this.printer.WireMaintLast = res.WireMaintLast;
+            this.printer.BeltMaintLast = res.BeltMaintLast;
+            this.printer.LubeMaintLast = res.LubeMaintLast;
+          },
+          error => {
+            console.error(error);
+            this.router.navigate(['/error']);
+          }
+        )
+  }
+
   private uploadImage(callback: (innerRes: any) => any) {
     this.imagesService.uploadImage(this.imageHolder)
         .subscribe(
@@ -144,7 +159,7 @@ export class PrinterDetailsComponent implements OnInit {
           }
           else if (segments.join("").includes("create")) {
             this.printer = new PrinterDetailView();
-            this.printer.MainPrinterImageUrl = "/assets/images/imageplaceholder.jpg";
+            this.printer.MainPrinterImageUrl = "assets/images/imageplaceholder.jpg";
 
             this.editMode = true;
             this.createMode = true;

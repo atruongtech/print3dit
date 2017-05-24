@@ -22,6 +22,10 @@ import { ErrorComponent } from './core/error/error.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { IntroductionComponent } from './core/introduction/introduction.component';
 
+export function httpFactory(backend: XHRBackend, options: RequestOptions) {
+    return new CustomHttpService(backend, options);
+  }
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,11 +53,9 @@ import { IntroductionComponent } from './core/introduction/introduction.componen
     ImagesService,
     {
       provide: Http, 
-      useFactory: (backend: XHRBackend, options: RequestOptions) => {
-        return new CustomHttpService(backend, options);
-      },
+      useFactory: httpFactory,
       deps: [XHRBackend, RequestOptions] 
     }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

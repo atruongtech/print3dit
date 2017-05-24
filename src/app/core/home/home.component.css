@@ -2,10 +2,6 @@ a {
     color:inherit;
 }
 
-.jumbotron {
-    background:url('/assets/images/jumbotron.jpg') no-repeat center center;
-}
-
 .main-link {
     background-size:cover !important; 
     width:160px; 

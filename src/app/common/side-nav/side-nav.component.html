@@ -1,10 +1,10 @@
     
-    <span class="truncate center-block text-center hidden-xs hidden-sm" *ngIf='auth.userProfile'><strong>{{auth.userProfile.name}}</strong></span>
+    <span class="truncate center-block text-center hidden-xs hidden-sm" *ngIf='auth.userProfile'><strong>{{auth.userProfile.username || auth.userProfile.name}}</strong></span>
     <ul class="nav nav-tabs nav-stacked hidden-xs hidden-sm" style="margin-top:10px; margin-bottom:15px">
         <li role="presentation"  routerLinkActive="active"><a routerLink="/prints" class="nav-link">Prints</a> </li>
-        <li role="presentation"  routerLinkActive="active"><a routerLink="/printers" class="nav-link" [ngClass]="{'attention': attentionPrinters}">Printers</a> </li>
-        <li role="presentation"  routerLinkActive="active"><a routerLink="/filaments" class="nav-link" [ngClass]="{'attention': attentionFilaments}">Filaments</a> </li>
+        <li role="presentation"  routerLinkActive="active"><a routerLink="/printers" class="nav-link">Printers</a> </li>
+        <li role="presentation"  routerLinkActive="active"><a routerLink="/filaments" class="nav-link">Filaments</a> </li>
         <!--<li role="presentation" ><a href="#" class="nav-link">Stats</a> </li>-->
     </ul>
 
-    <!-- <div class="text-center" style="margin-top:600px">Hello </div> -->
+    <!-- <div class="text-center" style="margin-top:600px">Hello </div> --> 

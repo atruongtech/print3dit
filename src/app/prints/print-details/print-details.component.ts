@@ -208,7 +208,7 @@ export class PrintDetailsComponent implements OnInit {
           }
           else if (segments.join("").includes("create")) {
             this.print = new PrintDetailView();
-            this.print.MainPrintImageUrl = "/assets/images/imageplaceholder.jpg";
+            this.print.MainPrintImageUrl = "assets/images/imageplaceholder.jpg";
 
             this.editMode = true;
             this.createMode = true;

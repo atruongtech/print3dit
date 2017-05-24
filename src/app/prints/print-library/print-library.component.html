@@ -36,7 +36,7 @@
   
   <hr/>
   <div class="center-block text-center" *ngIf="loading">
-    <img src="/assets/images/loader1.gif">
+    <img src="assets/images/loader1.gif">
   </div>
   <ng-container *ngIf="!loading">
     <div style="margin-bottom:10px; margin-left:15px;"><a [routerLink]="['create']" [hidden]="noPrinters || noFilaments"><span class="glyphicon glyphicon-plus"></span> New Print</a></div>
